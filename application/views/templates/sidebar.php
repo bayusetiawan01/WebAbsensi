@@ -32,6 +32,7 @@
                     $subMenu = $this->db->query($querySubMenu)->result_array();
                     ?>
                     <?php foreach ($subMenu as $sm) : ?>
+                    
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url($sm['url']); ?>" aria-expanded="false">
                                 <i class="<?= $sm['icon']; ?>"></i>
@@ -67,7 +68,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title"><?php echo ucfirst($this->uri->segment(2)) ?></h4>
+                
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
