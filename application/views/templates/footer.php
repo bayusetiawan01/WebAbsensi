@@ -6,7 +6,7 @@
 
     </div>
 
-    All Rights Reserved by Bayu. Designed and Developed by
+    All Rights Reserved by Bayu and Shenya
 </footer>
 </div>
 <!-- ============================================================== -->
