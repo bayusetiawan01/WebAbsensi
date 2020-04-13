@@ -110,4 +110,8 @@ class Auth extends CI_Controller
         Anda telah keluar.</div>');
         redirect('auth');
     }
+    public function blocked()
+    {
+        redirect('error403');
+    }
 }

@@ -13,7 +13,6 @@
 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('assets/images/logo.png'); ?>">
-    <title><?php echo SITE_NAME . ": " . ucfirst($this->uri->segment(1)) . " - " . ucfirst($this->uri->segment(2)) ?></title>
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css'); ?>">
     <link href="<?php echo base_url('assets/css/chartist.min.css'); ?>" rel="stylesheet">

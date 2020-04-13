@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/vendor/select2/select2.min.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/util.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/main.css'); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('assets/images/logo.png'); ?>">
 </head>
 
 <body>

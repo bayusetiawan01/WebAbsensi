@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Menu extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        is_log_in();
+    }
     public function index()
     {
         $data['title'] = 'Menu Management';
@@ -10,17 +15,16 @@ class Menu extends CI_Controller
 
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
-        $this->form_validation->set_rules('menu','Menu','required');
+        $this->form_validation->set_rules('menu', 'Menu', 'required');
 
-        if($this->form_validation->run() == false){
+        if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('templates/footer');
-        }
-        else{
-            $this->db->insert('user_menu',['menu' => $this->input->post('menu')]);
+        } else {
+            $this->db->insert('user_menu', ['menu' => $this->input->post('menu')]);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Menu Added!</div>');
             redirect('menu');
         }
@@ -31,23 +35,23 @@ class Menu extends CI_Controller
     {
         $data['title'] = 'Submenu Management';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $this->load->model('Menu_model','menu');
+        $this->load->model('Menu_model', 'menu');
 
         $data['subMenu'] = $this->menu->getSubMenu();
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
-        $this->form_validation->set_rules('title','Title','required');
-        $this->form_validation->set_rules('menu_id','Menu','required');
-        $this->form_validation->set_rules('url','URL','required');
-        $this->form_validation->set_rules('icon','icon','required');
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('menu_id', 'Menu', 'required');
+        $this->form_validation->set_rules('url', 'URL', 'required');
+        $this->form_validation->set_rules('icon', 'icon', 'required');
 
-        if($this->form_validation->run() == false){
+        if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('menu/submenu', $data);
             $this->load->view('templates/footer');
-        } else{
+        } else {
             $data = [
                 'title' => $this->input->post('title'),
                 'menu_id' => $this->input->post('menu_id'),
@@ -64,7 +68,7 @@ class Menu extends CI_Controller
     public function hapus($m)
     {
         $this->Menu_model->hapusDataMenu($m);
-        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Menu Deleted!</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Deleted!</div>');
         redirect('menu');
     }
 }

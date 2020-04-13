@@ -1,6 +1,6 @@
 <?php
 
-class Error404 extends CI_Controller
+class Error403 extends CI_Controller
 {
 	public function __construct()
 	{
@@ -9,6 +9,6 @@ class Error404 extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view("error404");
+		$this->load->view("error403");
 	}
 }

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>ERROR 404</title>
+    <title>ERROR 403</title>
     <!-- Custom CSS -->
     <link href="<?php echo base_url('assets/css/chartist.min.css'); ?>" rel="stylesheet">
     <!-- Custom CSS -->
@@ -29,8 +29,8 @@
         <!-- ============================================================== -->
         <div class="error-box">
             <div class="error-body text-center">
-                <h1 class="error-title text-danger">404</h1>
-                <h3 class="text-uppercase error-subtitle">PAGE NOT FOUND !</h3>
+                <h1 class="error-title text-danger">403</h1>
+                <h3 class="text-uppercase error-subtitle">ACCESS FORBIDEN !</h3>
                 <p class="text-muted m-t-30 m-b-30">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>
                 <a href="<?php echo base_url('user'); ?>" class="btn btn-danger btn-rounded waves-effect waves-light m-b-40">Back to home</a>
             </div>
