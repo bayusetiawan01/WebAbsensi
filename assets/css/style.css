@@ -6984,9 +6984,9 @@ html[dir="ltr"] body .p-l-0 {
     #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .topbar .top-navbar .navbar-header {
       width: 65px; }
       #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .topbar .top-navbar .navbar-header .navbar-brand {
-        justify-content: center; }
+        justify-content: left; padding-left: 14px; }
         #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .topbar .top-navbar .navbar-header .navbar-brand .logo {
-          display: none; }
+          display: flex; }
       #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .topbar .top-navbar .navbar-header.expand-logo {
         width: 250px; }
         #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .topbar .top-navbar .navbar-header.expand-logo .navbar-brand {
@@ -7594,7 +7594,7 @@ sidebar navigation
          Small cap
   *******************/
   .sidebar-nav ul .sidebar-item {
-    width: 250px;
+    width: 100%;
     /*******************
            First level
            ******************/ }
@@ -7650,7 +7650,6 @@ sidebar navigation
   color: #fff; }
   .sidebar-nav > #sidebarnav > .sidebar-item > .sidebar-link:hover i {
     color: #fff; }
-
 /*******************
  common m-p removed
 ******************/
