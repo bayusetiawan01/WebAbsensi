@@ -78,7 +78,7 @@
                  <!-- ============================================================== -->
                  <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         <span class="mr-2 d-none d-lg-inline text-gray-600 medium"><?= $user['name']; ?></span>
+                         <span class="mr-2 d-lg-inline text-gray-600 medium"><?= $user['name']; ?></span>
                          <img src="<?= base_url('assets/images/profile/') . $user['image'] ?>" alt="usir" class="rounded-circle" width="31"></a>
                      <div class="dropdown-menu dropdown-menu-right user-dd animated">
                          <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>

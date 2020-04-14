@@ -92,13 +92,13 @@ class Auth extends CI_Controller
                 'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('pass'), PASSWORD_DEFAULT),
                 'role_id' => 2,
-                'is_active' => 1,
+                'is_active' => 0,
                 'date_created' => time()
             ];
 
             $this->db->insert('user', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Congratulation! your account has been created. Please Login</div>');
+            Selamat akun anda berhasil dibuat! Mohon tunggu administrtor memverifikasi data.</div>');
             redirect('auth');
         }
     }
