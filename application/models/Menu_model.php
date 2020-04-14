@@ -10,12 +10,10 @@ class Menu_model extends Ci_Model
                     FROM `user_sub_menu` JOIN `user_menu`
                     ON `user_sub_menu`.`menu_id` = `user_menu`.`id`";
         return $this->db->query($query)->result_array();
-        
     }
 
     public function hapusDataMenu($m)
     {
-        $this->db->where('menu_id',$m);
-        $this->db->delete('menu_id');
+        $query = "DELETE FROM `user_sub_menu` WHERE 'user_sub_menu`.`id`";
     }
 }

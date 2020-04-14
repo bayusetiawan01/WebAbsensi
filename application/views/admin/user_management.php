@@ -37,7 +37,7 @@
                 <td><?= $m['name']; ?></td>
                 <td><?= $m['npm']; ?></td>
                 <td><?= $m['email']; ?></td>
-                <td><?= $m['date_created']; ?></td>
+                <td><?= date('d F Y', $m['date_created']); ?></td>
                 <td>
                   <?php if ($m['is_active'] == 0) { ?>
                     <a href="<?php echo site_url('admin/aktivasi/') . $m['npm'] ?>" class="badge badge-success">Aktifkan</a>
