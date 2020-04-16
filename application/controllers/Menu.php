@@ -79,4 +79,32 @@ class Menu extends CI_Controller
             redirect(site_url('menu/submenu'));
         }
     }
+
+    // bingunggg
+    public function edit()
+    {
+        $data['title'] = 'Edit Menu';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['menu'] = $this->db->get('user_menu')->result_array();
+
+        $this->form_validation->set_rules('menu', 'Menu', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('menu/edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            // $this->Menu_model->editMenu();
+            $edit_menu = $this->input->post('name_menu');
+
+            $this->db->set('name_menu', $edit_menu);
+            $this->db->where('email', $this->session->userdata('email'));
+            $this->db->update('user_menu');
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Edited!</div>');
+            redirect('menu');
+        }
+    }
 }

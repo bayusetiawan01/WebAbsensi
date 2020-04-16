@@ -32,7 +32,7 @@
               <th scope="row"><?= $i; ?></th>
               <td><?= $m['menu']; ?></td>
               <td>
-                <a href="" class="badge badge-success">edit</a>
+                <a href="<?= base_url(); ?>menu/edit/<?= $m['menu']; ?>" class="badge badge-success">edit</a>
                 <a href="<?= base_url(); ?>menu/hapusmenu/<?= $m['menu']; ?>" class="badge badge-danger" onclick="return confirm('sure?');">delete</a>
               </td>
             </tr>
