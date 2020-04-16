@@ -40,10 +40,10 @@
                 <td><?= date('d F Y', $m['date_created']); ?></td>
                 <td>
                   <?php if ($m['is_active'] == 0) { ?>
-                    <a href="<?php echo site_url('admin/aktivasi/') . $m['npm'] ?>" class="badge badge-success">Aktifkan</a>
-                    <a href="<?php echo site_url('admin/delete/') . $m['npm'] ?>" class="badge badge-danger">Hapus</a>
+                    <a href="<?php echo site_url('admin/aktivasi/') . $m['npm'] ?>" class="badge badge-success">Active</a>
+                    <a href="<?php echo site_url('admin/delete/') . $m['npm'] ?>" class="badge badge-danger">Delete</a>
                   <?php } else { ?>
-                    <a href="" class="badge badge-warning">Nonaktifkan</a>
+                    <a href="" class="badge badge-warning">Nonactive</a>
                   <?php } ?>
                 </td>
               </tr>

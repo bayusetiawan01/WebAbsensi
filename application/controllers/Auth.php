@@ -51,12 +51,12 @@ class Auth extends CI_Controller
                 }
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                akun belum diverifikasi!</div>');
+                This account has not been verified!</div>');
                 redirect('auth');
             }
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            Email tidak terdaftar!</div>');
+            This email is not registered!</div>');
             redirect('auth');
         }
     }
@@ -72,13 +72,22 @@ class Auth extends CI_Controller
             'is_unique' => 'This email has already registered!'
         ]);
         $this->form_validation->set_rules(
-            'pass',
+            'pass1',
             'Password',
-            'required|trim|min_length[6]',
+            'required|trim|min_length[6]|matches[pass2]',
             [
-                'min_length' => 'Password too short!'
+                'matches' => 'Password does not match!',
+                'min_length' => 'Password must contain 6 characters!'
             ]
         );
+        $this->form_validation->set_rules(
+            'pass2',
+            'Password',
+            'required|trim|matches[pass1]'
+        );
+
+
+
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/auth_header');
@@ -98,7 +107,7 @@ class Auth extends CI_Controller
 
             $this->db->insert('user', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Selamat akun anda berhasil dibuat! Mohon tunggu administrtor memverifikasi data.</div>');
+            Congratulation, your account has been made! Administrator will verified your data.</div>');
             redirect('auth');
         }
     }
@@ -107,7 +116,7 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('role_id');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Anda telah keluar.</div>');
+        You have been logged out! </div>');
         redirect('auth');
     }
     public function blocked()

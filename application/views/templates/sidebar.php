@@ -32,15 +32,17 @@
                     $subMenu = $this->db->query($querySubMenu)->result_array();
                     ?>
                     <?php foreach ($subMenu as $sm) : ?>
-                    
+
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url($sm['url']); ?>" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link pb-0" href="<?php echo base_url($sm['url']); ?>" aria-expanded="false">
                                 <i class="<?= $sm['icon']; ?>"></i>
                                 <span class="hide-menu"><?= $sm['title']; ?></span>
                             </a>
                         </li>
                     <?php endforeach; ?>
                 <?php endforeach; ?>
+
+                <hr class="sidebar-divider mt-3">
 
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url('auth/logout/'); ?>" aria-expanded="false">
@@ -68,7 +70,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                
+
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">

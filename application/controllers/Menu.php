@@ -65,10 +65,18 @@ class Menu extends CI_Controller
         }
     }
 
-    public function hapus($m)
-    {
-        $this->Menu_model->hapusDataMenu($m);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Deleted!</div>');
-        redirect('menu');
-    }
+    // public function hapus($m)
+    // {
+    //     $this->Menu_model->hapusDataMenu($m);
+    //     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Deleted!</div>');
+    //     redirect('menu');
+    // }
+
+    // public function delete($id)
+    // {
+    //     if ($this->submenu_model->delete($id)) {
+    //         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub Menu Deleted!</div>');
+    //         redirect(site_url('menu/submenu'));
+    //     }
+    // }
 }

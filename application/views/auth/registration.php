@@ -9,8 +9,9 @@
         </span>
         <div class="text-center">
             <?= form_error('npm', '<div class="alert alert-danger">', '</div>'); ?>
-            <?= form_error('pass', '<div class="alert alert-danger">', '</div>'); ?>
+            <?= form_error('pass1', '<div class="alert alert-danger">', '</div>'); ?>
             <?= form_error('email', '<div class="alert alert-danger">', '</div>'); ?>
+
         </div>
         <div class="wrap-input100 validate-input" data-validate="Name is Required!">
             <input class="input100" type="text" id="name" name="name" placeholder="Nama Lengkap" value="<?= set_value('name') ?>">
@@ -37,7 +38,15 @@
         </div>
 
         <div class="wrap-input100 validate-input" data-validate="Password is required">
-            <input class="input100" type="password" name="pass" placeholder="Password">
+            <input class="input100" type="password1" name="pass1" placeholder="Password">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+            </span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Password is required">
+            <input class="input100" type="password2" name="pass2" placeholder="Repeat Password">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <i class="fa fa-lock" aria-hidden="true"></i>
