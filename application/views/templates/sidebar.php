@@ -34,7 +34,7 @@
                     <?php foreach ($subMenu as $sm) : ?>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link pb-0" href="<?php echo base_url($sm['url']); ?>" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url($sm['url']); ?>" aria-expanded="false">
                                 <i class="<?= $sm['icon']; ?>"></i>
                                 <span class="hide-menu"><?= $sm['title']; ?></span>
                             </a>

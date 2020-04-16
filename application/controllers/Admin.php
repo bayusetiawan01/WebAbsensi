@@ -38,6 +38,11 @@ class Admin extends CI_Controller
         redirect(site_url('admin/usermanagement'));
     }
 
+    public function deaktivasi($id)
+    {
+        $this->user_model->deaktivasi($id);
+        redirect(site_url('admin/usermanagement'));
+    }
     public function delete($id = null)
     {
         if ($this->user_model->delete($id)) {

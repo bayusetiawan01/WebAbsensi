@@ -43,7 +43,7 @@
                     <a href="<?php echo site_url('admin/aktivasi/') . $m['npm'] ?>" class="badge badge-success">Active</a>
                     <a href="<?php echo site_url('admin/delete/') . $m['npm'] ?>" class="badge badge-danger">Delete</a>
                   <?php } else { ?>
-                    <a href="" class="badge badge-warning">Nonactive</a>
+                    <a href="<?php echo site_url('admin/deaktivasi/') . $m['npm'] ?>" class="badge badge-warning">Nonactive</a>
                   <?php } ?>
                 </td>
               </tr>

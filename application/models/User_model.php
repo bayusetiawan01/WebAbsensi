@@ -74,7 +74,15 @@ class User_model extends CI_Model
     }
     public function aktivasi($id)
     {
-        return $this->db->update($this->is_active, 1, array("npm" => $id));
+        $this->db->set("is_active", 1);
+        $this->db->where("npm", $id);
+        $this->db->update($this->_table);
+    }
+    public function deaktivasi($phapus)
+    {
+        $this->db->set("is_active", 0);
+        $this->db->where("npm", $phapus);
+        $this->db->update($this->_table);
     }
 
     public function delete($id)

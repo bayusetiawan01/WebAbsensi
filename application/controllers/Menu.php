@@ -7,6 +7,8 @@ class Menu extends CI_Controller
     {
         parent::__construct();
         is_log_in();
+        $this->load->model("menu_model");
+        $this->load->model("submenu_model");
     }
     public function index()
     {
@@ -65,18 +67,16 @@ class Menu extends CI_Controller
         }
     }
 
-    // public function hapus($m)
-    // {
-    //     $this->Menu_model->hapusDataMenu($m);
-    //     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Deleted!</div>');
-    //     redirect('menu');
-    // }
-
-    // public function delete($id)
-    // {
-    //     if ($this->submenu_model->delete($id)) {
-    //         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub Menu Deleted!</div>');
-    //         redirect(site_url('menu/submenu'));
-    //     }
-    // }
+    public function hapusmenu($id = null)
+    {
+        if ($this->menu_model->delete($id)) {
+            redirect(site_url('menu'));
+        }
+    }
+    public function hapussubmenu($id = null)
+    {
+        if ($this->submenu_model->delete($id)) {
+            redirect(site_url('menu/submenu'));
+        }
+    }
 }
