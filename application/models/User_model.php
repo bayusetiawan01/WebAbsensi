@@ -89,4 +89,17 @@ class User_model extends CI_Model
     {
         return $this->db->delete($this->_table, array("npm" => $id));
     }
+
+    public function setAdmin($pbantu)
+    {
+        $this->db->set("role_id", 1);
+        $this->db->where("npm", $pbantu);
+        $this->db->update($this->_table);
+    }
+    public function setUser($pbantu)
+    {
+        $this->db->set("role_id", 2);
+        $this->db->where("npm", $pbantu);
+        $this->db->update($this->_table);
+    }
 }

@@ -32,21 +32,61 @@ class Admin extends CI_Controller
         $this->load->view('admin/user_management', $data);
         $this->load->view('templates/footer');
     }
-    public function aktivasi($id)
+    public function aktivasi($pointer)
     {
-        $this->user_model->aktivasi($id);
+        $this->user_model->aktivasi($pointer);
+        $this->_sendEmail($pointer, 'activation');
         redirect(site_url('admin/usermanagement'));
     }
 
-    public function deaktivasi($id)
+    public function deaktivasi($pointer)
     {
-        $this->user_model->deaktivasi($id);
+        $this->user_model->deaktivasi($pointer);
+        $this->_sendEmail($pointer, 'deactivation');
         redirect(site_url('admin/usermanagement'));
     }
+
     public function delete($id = null)
     {
         if ($this->user_model->delete($id)) {
+            $this->_sendEmail($id, 'delete');
             redirect(site_url('admin/usermanagement'));
+        }
+    }
+
+    private function _sendEmail($pointer, $type)
+    {
+        $kirim = $this->db->get_where('user', ['npm' => $pointer])->row_array();
+        $this->load->library('email');
+        $config = array();
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+        $config['smtp_user'] = 'absensipraktikum.mtk@gmail.com';
+        $config['smtp_pass'] = 'mataikan123';
+        $config['smtp_port'] = 465;
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $this->email->initialize($config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('absensipraktikum.mtk@gmail.com', 'Absensi Praktikum Matematika Unpad');
+        $this->email->to($kirim['email']);
+        if ($type == 'activation') {
+            $this->email->subject('Laporan Aktivasi Akun');
+            $this->email->message('Selamat akun anda sudah diaktivasi oleh Admin!');
+        } elseif ($type == 'deactivation') {
+            $this->email->subject('Laporan Penonaktifan Akun');
+            $this->email->message('Maaf akun anda dinonaktifkan oleh Admin! Silahkan hubungi Asisten Laboratorium untuk informasi lebih lanjut');
+        } else {
+            $this->email->subject('Laporan Penghapusan Akun');
+            $this->email->message('Maaf akun anda dihapus oleh Admin! Silahkan hubungi Asisten Laboratorium untuk informasi lebih lanjut');
+        }
+
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
         }
     }
 
@@ -99,5 +139,16 @@ class Admin extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         Access Changed!</div>');
+    }
+
+    public function setAdmin($pointer)
+    {
+        $this->user_model->setAdmin($pointer);
+        redirect(site_url('admin/usermanagement'));
+    }
+    public function setUser($pointer)
+    {
+        $this->user_model->setUser($pointer);
+        redirect(site_url('admin/usermanagement'));
     }
 }

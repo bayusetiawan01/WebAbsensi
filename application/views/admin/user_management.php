@@ -27,6 +27,7 @@
               <th scope="col">Email</th>
               <th scope="col">Date</th>
               <th scope="col">Action</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -44,6 +45,13 @@
                     <a href="<?php echo site_url('admin/delete/') . $m['npm'] ?>" class="badge badge-danger">Delete</a>
                   <?php } else { ?>
                     <a href="<?php echo site_url('admin/deaktivasi/') . $m['npm'] ?>" class="badge badge-warning">Nonactive</a>
+                  <?php } ?>
+                </td>
+                <td>
+                  <?php if ($m['role_id'] == 1) { ?>
+                    <a href="<?php echo site_url('admin/setUser/') . $m['npm'] ?>" class="badge badge-danger">Set User</a>
+                  <?php } else { ?>
+                    <a href="<?php echo site_url('admin/setAdmin/') . $m['npm'] ?>" class="badge badge-success">Set Admin</a>
                   <?php } ?>
                 </td>
               </tr>
