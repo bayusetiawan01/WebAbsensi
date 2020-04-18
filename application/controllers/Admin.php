@@ -72,7 +72,8 @@ class Admin extends CI_Controller
         $this->email->to($kirim['email']);
         if ($type == 'activation') {
             $this->email->subject('Laporan Aktivasi Akun');
-            $this->email->message('Selamat akun anda sudah diaktivasi oleh Admin!');
+            $this->email->message('Selamat akun anda sudah diaktivasi oleh Admin!
+            Click this link to login : <a href="' . base_url() . '">Link</a>');
         } elseif ($type == 'deactivation') {
             $this->email->subject('Laporan Penonaktifan Akun');
             $this->email->message('Maaf akun anda dinonaktifkan oleh Admin! Silahkan hubungi Asisten Laboratorium untuk informasi lebih lanjut');
@@ -150,5 +151,38 @@ class Admin extends CI_Controller
     {
         $this->user_model->setUser($pointer);
         redirect(site_url('admin/usermanagement'));
+    }
+
+    public function forgotPassword()
+    {
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/auth_header');
+            $this->load->view('auth/forgot-password');
+            $this->load->view('templates/auth_footer');
+        } else {
+            $email = $this->input->post('email');
+            $user = $this->db->get_where('user', ['email' => $email, 'is_active' => 1])->row_array();
+
+            if ($user) {
+                $token = base64_encode(random_bytes(32));
+                $user_token = [
+                    'email' => $email,
+                    'token' => $token,
+                    'date_created' => time()
+                ];
+
+                $this->db->insert('user_token', $user_token);
+                $this->_sendEmail($token, 'forgot');
+
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                Please check your email to reset your password!</div>');
+                redirect('auth');
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                Email is not registered or activated!</div>');
+                redirect('auth/forgotpassword');
+            }
+        }
     }
 }

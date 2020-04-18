@@ -58,7 +58,13 @@
                 Register Account
             </button>
         </div>
+        <hr>
+        <div class="text-center">
 
+            <a class="txt2" href="<?= base_url('auth/forgotpassword'); ?>">
+                Forgot Password?
+            </a>
+        </div>
         <div class="text-center">
 
             <a class="txt2" href="<?= base_url(''); ?>">
