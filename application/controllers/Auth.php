@@ -104,7 +104,7 @@ class Auth extends CI_Controller
                 'npm' => htmlspecialchars($this->input->post('npm', true)),
                 'email' => htmlspecialchars($email),
                 'image' => 'default.jpg',
-                'password' => password_hash($this->input->post('pass'), PASSWORD_DEFAULT),
+                'password' => password_hash($this->input->post('pass1'), PASSWORD_DEFAULT),
                 'role_id' => 2,
                 'is_active' => 0,
                 'date_created' => time()
@@ -131,20 +131,18 @@ class Auth extends CI_Controller
 
     private function _sendEmail($token, $type)
     {
-        $config = [
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'absensipraktikum.mtk@gmail.com',
-            'smtp_pass' => 'mataikan123',
-            'smtp_port' => 465,
-            'mailtype' => 'html',
-            'charset' => 'utf-8',
-            'newline' => "\r\n"
-        ];
-
-        $this->load->library('email', $config);
-
-        $this->email->from('absensipraktikum.mtk@gmail.com', 'Absensi Praktikun Matematika Unpad');
+        $this->load->library('email');
+        $config = array();
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+        $config['smtp_user'] = 'absensipraktikum.mtk@gmail.com';
+        $config['smtp_pass'] = 'mataikan123';
+        $config['smtp_port'] = 465;
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $this->email->initialize($config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('absensipraktikum.mtk@gmail.com', 'Absensi Praktikum Matematika Unpad');
         $this->email->to($this->input->post('email'));
 
         if ($type == 'verify') {
@@ -160,9 +158,9 @@ class Auth extends CI_Controller
         }
         if ($this->email->send()) {
             return true;
-            // } else {
-            //     echo $this->email->print_debugger();
-            //     die;
+        } else {
+            echo $this->email->print_debugger();
+            die;
         }
     }
 

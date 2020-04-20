@@ -28,20 +28,17 @@
             </span>
             <?= form_error('pass', '<small class="text-danger pl-3">', '</small>'); ?>
         </div>
-
+        <div class="text-left pl-3">
+            <a class="txt2" href="<?= base_url('auth/forgotpassword'); ?>">
+                Forgot Password?
+            </a>
+        </div>
         <div class="container-login100-form-btn">
             <button type="submit" class="login100-form-btn button_hover">
                 Login
             </button>
         </div>
         <hr>
-        <div class="text-center">
-
-            <a class="txt2" href="<?= base_url('auth/forgotpassword'); ?>">
-                Forgot Password?
-            </a>
-        </div>
-
         <div class="text-center">
             <a class="txt2" href="<?= base_url('registration'); ?>">
                 Create your Account

@@ -46,7 +46,7 @@ class Admin extends CI_Controller
         redirect(site_url('admin/usermanagement'));
     }
 
-    public function delete($id = null)
+    public function delete($id)
     {
         if ($this->user_model->delete($id)) {
             $this->_sendEmail($id, 'delete');
