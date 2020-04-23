@@ -185,4 +185,77 @@ class Admin extends CI_Controller
             }
         }
     }
+    public function matakuliah()
+    {
+        $data['title'] = 'Class Management';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['matkul'] = $this->db->get('user_matkul')->result_array();
+
+        $this->form_validation->set_rules('matkul', 'Mata Kuliah', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('admin/matakuliah', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->db->insert('user_matkul', ['matkul' => $this->input->post('matkul')]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Lesson Added!</div>');
+            redirect('admin/matakuliah');
+        }
+    }
+    public function kelas()
+    {
+        $data['title'] = 'Class Management';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->model('Kelas_model', 'kelas');
+
+        $data['kelas'] = $this->kelas->getKelas();
+        $data['matkul'] = $this->db->get('user_matkul')->result_array();
+
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('matkul_id', 'Mata Kuliah', 'required');
+        $this->form_validation->set_rules('url', 'URL', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('admin/kelas', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'title' => $this->input->post('title'),
+                'matkul_id' => $this->input->post('matkul_id'),
+                'url' => $this->input->post('url'),
+                'is_active' => $this->input->post('is_active')
+            ];
+            $this->db->insert('user_kelas', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Class Added!</div>');
+            redirect('admin/kelas');
+        }
+    }
+
+    // Halaman Kelas Admin
+    public function murni1alprog()
+    {
+        $data['title'] = 'Murni 1 Algoritma Pemrograman';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['matkul'] = $this->db->get('user_matkul')->result_array();
+
+        $this->form_validation->set_rules('matkul', 'Mata Kuliah', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('daftarkelas/murni1alprog', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->db->insert('user_matkul', ['matkul' => $this->input->post('matkul')]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Lesson Added!</div>');
+            redirect('admin/matakuliah');
+        }
+    }
 }
