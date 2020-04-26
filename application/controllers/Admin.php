@@ -258,4 +258,24 @@ class Admin extends CI_Controller
             redirect('admin/matakuliah');
         }
     }
+    public function absen()
+    {
+        $data['title'] = 'Absen Management';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['absen'] = $this->db->get('user_absensi')->result_array();
+
+        $this->form_validation->set_rules('matkul', 'Mata Kuliah', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('admin/absen', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->db->insert('user_matkul', ['matkul' => $this->input->post('matkul')]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Lesson Added!</div>');
+            redirect('admin/matakuliah');
+        }
+    }
 }

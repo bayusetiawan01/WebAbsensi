@@ -28,3 +28,9 @@ function check_access($role_id, $menu_id)
         return "checked='checked'";
     }
 }
+
+function is_weekend($tgl = false)
+{
+    $tgl = @$tgl ? $tgl : date('d-m-Y');
+    return in_array(date('l', strtotime($tgl)), ['Saturday', 'Sunday']);
+}

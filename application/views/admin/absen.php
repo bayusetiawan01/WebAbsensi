@@ -24,28 +24,26 @@
                                 <th scope="col">Mata Kuliah</th>
                                 <th scope="col">Pertemuan</th>
                                 <th scope="col">Tanggal</th>
-                                <th scope="col">Absen Masuk</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Jam Masuk</th>
+                                <th scope="col">Jam Selesai</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
                             <?php foreach ($absen as $a) : ?>
                                 <tr>
-                                <tr>
-                                    <?php if (is_weekend()) : ?>
-                                        <td class="text-danger">Hari ini libur. Tidak perlu absen.</td>
-                                    <?php else : ?>
-                                        <th scope="row"><?= $i; ?></th>
-                                        <td><?= $a['matkul_id']; ?></td>
-                                        <td></td>
-                                        <td><?= $a['tanggal']; ?></td>
-                                        <td>
-                                            <a href="<?php echo site_url('user/absen/masuk/') . $a['id'] ?>" class="badge badge-success">Masuk</a>
-                                            <!--  -->
-                                        </td>
-                                        <td><?= $a['keterangan']; ?></td>
-                                    <?php endif; ?>
+                                    <th scope="row"><?= $i; ?></th>
+                                    <td><?= $a['matkul_id']; ?></td>
+                                    <td></td>
+                                    <td><?= $a['tanggal']; ?></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <a href="<?php echo site_url('user/absen/masuk/') . $a['id'] ?>" class="badge badge-success">Edit</a>
+                                        <a href="<?php echo site_url('user/absen/masuk/') . $a['id'] ?>" class="badge badge-danger">Delete</a>
+                                        <!--  -->
+                                    </td>
                                 </tr>
 
                                 </tr>
