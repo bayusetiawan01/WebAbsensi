@@ -244,7 +244,6 @@ class Admin extends CI_Controller
         $data['pertemuan'] = $this->db->get_where('user_kelas_pertemuan', ['kelas_id' => $pointer2])->result_array();
         $this->load->model('Kelas_model', 'model1');
         $data['mahasiswa'] = $this->model1->getMahasiswa($pointer2);
-        $mahasiswa = $data['mahasiswa'];
         $kelas = $this->db->get_where('user_kelas', ['id' => $pointer2])->row_array();
         $matkul = $this->db->get_where('user_matkul', ['id' => $kelas['matkul_id']])->row_array();
         $data['title'] = $matkul['matkul'] . ' ' . $kelas['title'];
@@ -252,24 +251,36 @@ class Admin extends CI_Controller
         $data['matkul'] = $matkul;
         $data['kelasid'] = $pointer2;
 
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('daftarkelas/kelas', $data);
+        $this->load->view('templates/footer');
+    }
+    public function addpertemuan()
+    {
+        $this->load->model('Kelas_model', 'model1');
+        $mahasiswa = $this->model1->getMahasiswa($this->input->post('kelas_id'));
+        $data['title'] = 'Dashboard';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->form_validation->set_rules('tanggal', 'tanggal', 'required');
         $this->form_validation->set_rules('keterangan', 'keterangan', 'required');
-
+        $this->form_validation->set_rules('kelas_id', 'kelas_id', 'required');
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('templates/sidebar', $data);
-            $this->load->view('daftarkelas/kelas', $data);
+            $this->load->view('admin/index', $data);
             $this->load->view('templates/footer');
         } else {
-            $data2 = [
-                'kelas_id' => $pointer2,
+            $data = [
+                'kelas_id' => $this->input->post('kelas_id'),
                 'tanggal' => $this->input->post('tanggal'),
                 'keterangan' => $this->input->post('keterangan'),
                 'time_per' => time()
             ];
-            $this->db->insert('user_kelas_pertemuan', $data2);
-            $pertemuan = $data['pertemuan'];
+            $this->db->insert('user_kelas_pertemuan', $data);
+            $pertemuan = $this->db->get('user_kelas_pertemuan')->result_array();
             foreach ($pertemuan as $p) :
                 $perid = $p['id'];
             endforeach;
@@ -281,9 +292,8 @@ class Admin extends CI_Controller
                 ];
                 $this->db->insert('user_absen', $data3);
             endforeach;
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Pertemuan Menu Added!</div>');
-            redirect('admin/kelas/' . $pointer2);
         }
+        redirect('admin/kelas/' . $this->input->post('kelas_id'));
     }
     public function addmhs($pointer1, $pointer2)
     {

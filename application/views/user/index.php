@@ -25,7 +25,7 @@
                     <div class="col-md-3">
                         <img src="<?= base_url() . $a['img_url'] ?>" class="card-img" alt="...">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-5">
                         <div class="card-body">
                             <h5 class="h4" style="text-align: left"><?= $a['matkul']; ?></h5>
                             <p class="h5" style="text-align: left"><?= $a['title']; ?></p>
@@ -36,7 +36,55 @@
                             WHERE 'user_absen'.'npm' = $npm";
                             ?>
                             <h5 class="h4" style="text-align: left"></h5>
+                            <!-- Cari Pertemuan Terakhir-->
+                            <?php $vara = "Belum ada kelas.";
+                            $varb = 0;
+                            $varc = 0;
+                            foreach ($kehadiran as $k) :
+                                if ($k['kelas_id'] == $a['id']) {
+                                    $vara = $k['keterangan'];
+                                    $varb = $k['tanggal'];
+                                    $varc = $k['time_per'];
+                                    $vard = $k['status_per'];
+                                }
+                            endforeach; ?>
+                            <br>
+                            <h4 style="text-align:left"><?= $vara ?></h4>
+                            <h5 style="text-align:left">Tanggal : <?= $varb ?></h5>
+                            <br>
+                            <?php if ($vard == 1) { ?>
+                                <button type="button" class="btn btn-success">Anda Sudah Menghadiri Kelas</button>
+                            <?php } else if (time() - $varc <= 300) { ?>
+                                <button type="button" class="btn btn-success">Hadiri Kelas</button>
+                            <?php } else if ($varc == 0) { ?>
+                                <button type="button" class="btn btn-dark">Kelas Belum Tersedia</button>
+                            <?php } else { ?>
+                                <button type="button" class="btn btn-secondary">Terlambat Menghadiri Kelas</button>
+                            <?php } ?>
+                            <button type="button" class="btn btn-info">Detail Absensi</button>
                         </div>
+                    </div>
+                    <div class="col-md-3">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($kehadiran as $k) :
+                                    if ($k['kelas_id'] == $a['id']) { ?>
+                                        <td><?= $k['tanggal']; ?></td>
+                                        <?php if ($k['status_per'] == 0) { ?>
+                                            <td>Tidak Hadir</td>
+                                        <?php } else { ?>
+                                            <td>Hadir</td>
+                                        <?php } ?>
+                                <?php }
+                                endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -48,44 +96,3 @@
     <!--  -->
 
     <!-- Modal -->
-    <div class="modal fade" id="newSubMenuModal" tabindex="-1" role="dialog" aria-labelledby="newSubMenuModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newMenuModalLabel">Add User</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="<?= base_url('menu/submenu'); ?>" method="post">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Nama">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="url" name="url" placeholder="NPM">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="icon" name="icon" placeholder="Submenu icon">
-                        </div>
-
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" checked>
-                                <label class="form-check-label" for="is_active">
-                                    Active?
-                                </label>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>

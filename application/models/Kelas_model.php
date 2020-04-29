@@ -31,6 +31,12 @@ class Kelas_model extends CI_Model
 
         return $this->db->query($query)->result_array();
     }
+    public function getDetailclass()
+    {
+        $query = "SELECT `user_absen`.*, `user_kelas_pertemuan`.*
+        FROM `user_absen` JOIN `user_kelas_pertemuan` ON `user_absen`.`pertemuan_id` = `user_kelas_pertemuan`.`id`";
+        return $this->db->query($query)->result_array();
+    }
     public function delete($phapus)
     {
         return $this->db->delete($this->_table, array("matkul" => $phapus));

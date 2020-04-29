@@ -15,6 +15,7 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->model('Kelas_model', 'model1');
         $data['akses'] = $this->model1->getAkses();
+        $data['kehadiran'] = $this->model1->getDetailclass();
         $data['pertemuan'] = $this->db->get('user_kelas_pertemuan')->result_array();
 
         $this->load->view('templates/header', $data);

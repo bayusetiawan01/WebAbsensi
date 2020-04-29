@@ -82,13 +82,16 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('admin/kelas/') . $kelasid; ?>" parameter="post">
+            <form action="<?= base_url('admin/addpertemuan') ?>" method="post">
                 <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="kelas_id" name="kelas_id" value="<?php echo $kelasid; ?>" readonly>
+                    </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan Pertemuan">
                     </div>
                     <div class="form-group">
-                        <input type="date" class="form-control" id="tanggal" name="tangal">
+                        <input type="date" class="form-control" id="tanggal" name="tanggal">
                     </div>
                 </div>
                 <div class="modal-footer">
