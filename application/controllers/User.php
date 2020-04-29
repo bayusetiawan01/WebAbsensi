@@ -8,11 +8,14 @@ class User extends CI_Controller
         parent::__construct();
         is_log_in();
     }
+
     public function index()
     {
         $data['title'] = 'Absensi Praktikum';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['absen'] = $this->db->get('user_absensi')->result_array();
+        $this->load->model('Kelas_model', 'model1');
+        $data['akses'] = $this->model1->getAkses();
+        $data['pertemuan'] = $this->db->get('user_kelas_pertemuan')->result_array();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);

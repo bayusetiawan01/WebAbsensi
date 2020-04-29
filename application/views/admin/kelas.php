@@ -26,7 +26,6 @@
                         <th scope="col">#</th>
                         <th scope="col">Title</th>
                         <th scope="col">Mata Kuliah</th>
-                        <th scope="col">Url</th>
                         <th scope="col">Active</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -38,7 +37,6 @@
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $k['title']; ?></td>
                             <td><?= $k['matkul']; ?></td>
-                            <td><?= $k['url']; ?></td>
                             <td><?= $k['is_active']; ?></td>
                             <td>
                                 <a href="" class="badge badge-success">edit</a>
@@ -84,10 +82,6 @@
                                 <option value="<?= $m['id']; ?>"><?= $m['matkul']; ?></option>
                             <?php endforeach; ?>
                         </select>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="url" name="url" placeholder="Class url">
                     </div>
 
                     <div class="form-group">

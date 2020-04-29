@@ -205,7 +205,7 @@ class Admin extends CI_Controller
             redirect('admin/matakuliah');
         }
     }
-    public function kelas()
+    public function ClassManagement()
     {
         $data['title'] = 'Class Management';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -216,7 +216,6 @@ class Admin extends CI_Controller
 
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('matkul_id', 'Mata Kuliah', 'required');
-        $this->form_validation->set_rules('url', 'URL', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -228,7 +227,6 @@ class Admin extends CI_Controller
             $data = [
                 'title' => $this->input->post('title'),
                 'matkul_id' => $this->input->post('matkul_id'),
-                'url' => $this->input->post('url'),
                 'is_active' => $this->input->post('is_active')
             ];
             $this->db->insert('user_kelas', $data);
@@ -238,25 +236,63 @@ class Admin extends CI_Controller
     }
 
     // Halaman Kelas Admin
-    public function murni1alprog()
+    public function kelas($pointer2)
     {
-        $data['title'] = 'Murni 1 Algoritma Pemrograman';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['matkul'] = $this->db->get('user_matkul')->result_array();
+        $data['member'] = $this->db->get('user')->result_array();
+        $data['akses'] = $this->db->get('user_access_kelas')->result_array();
+        $data['pertemuan'] = $this->db->get_where('user_kelas_pertemuan', ['kelas_id' => $pointer2])->result_array();
+        $this->load->model('Kelas_model', 'model1');
+        $data['mahasiswa'] = $this->model1->getMahasiswa($pointer2);
+        $mahasiswa = $data['mahasiswa'];
+        $kelas = $this->db->get_where('user_kelas', ['id' => $pointer2])->row_array();
+        $matkul = $this->db->get_where('user_matkul', ['id' => $kelas['matkul_id']])->row_array();
+        $data['title'] = $matkul['matkul'] . ' ' . $kelas['title'];
+        $data['kelas'] = $kelas;
+        $data['matkul'] = $matkul;
+        $data['kelasid'] = $pointer2;
 
-        $this->form_validation->set_rules('matkul', 'Mata Kuliah', 'required');
+        $this->form_validation->set_rules('tanggal', 'tanggal', 'required');
+        $this->form_validation->set_rules('keterangan', 'keterangan', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('templates/sidebar', $data);
-            $this->load->view('daftarkelas/murni1alprog', $data);
+            $this->load->view('daftarkelas/kelas', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->db->insert('user_matkul', ['matkul' => $this->input->post('matkul')]);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Lesson Added!</div>');
-            redirect('admin/matakuliah');
+            $data2 = [
+                'kelas_id' => $pointer2,
+                'tanggal' => $this->input->post('tanggal'),
+                'keterangan' => $this->input->post('keterangan'),
+                'time_per' => time()
+            ];
+            $this->db->insert('user_kelas_pertemuan', $data2);
+            $pertemuan = $data['pertemuan'];
+            foreach ($pertemuan as $p) :
+                $perid = $p['id'];
+            endforeach;
+            foreach ($mahasiswa as $m) :
+                $data3 = [
+                    'npm' => $m['npm'],
+                    'pertemuan_id' => $perid,
+                    'status_per' => 0
+                ];
+                $this->db->insert('user_absen', $data3);
+            endforeach;
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Pertemuan Menu Added!</div>');
+            redirect('admin/kelas/' . $pointer2);
         }
+    }
+    public function addmhs($pointer1, $pointer2)
+    {
+        $data = [
+            'kelas_id' => $pointer2,
+            'npm' => $pointer1
+        ];
+        $this->db->insert('user_access_kelas', $data);
+        redirect('admin/kelas/' . $pointer2);
     }
     public function absen()
     {
