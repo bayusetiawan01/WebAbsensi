@@ -133,4 +133,10 @@ class User extends CI_Controller
             }
         }
     }
+    public function setHadir($pointer, $p2)
+    {
+        $this->load->model("kelas_model");
+        $this->kelas_model->setHadir($pointer, $p2);
+        redirect(site_url('user/'));
+    }
 }

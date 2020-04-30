@@ -46,6 +46,7 @@
                     <th scope="col">Nama</th>
                     <th scope="col">NPM</th>
                     <th scope="col">Kehadiran</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <?php $i = 1; ?>
@@ -56,6 +57,9 @@
                     <td><?= $m['npm']; ?></td>
                     <td>
                         <a href="" class="badge badge-success">Detail</a>
+                    </td>
+                    <td>
+                        <a href="<?php echo site_url('admin/deletemhs/') . $m['id'] . '/' . $kelasid ?>" class="badge badge-danger">Delete</a>
                     </td>
                 </tr>
                 <?php $i++; ?>

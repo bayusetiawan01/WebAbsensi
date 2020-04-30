@@ -49,8 +49,28 @@ class Admin extends CI_Controller
     public function delete($id)
     {
         if ($this->user_model->delete($id)) {
-            $this->_sendEmail($id, 'delete');
             redirect(site_url('admin/usermanagement'));
+        }
+    }
+    public function deletekelas($id)
+    {
+        $this->load->model("kelas_model");
+        if ($this->kelas_model->deletekelas($id)) {
+            redirect(site_url('admin/classmanagement'));
+        }
+    }
+    public function deletematkul($id)
+    {
+        $this->load->model("kelas_model");
+        if ($this->kelas_model->deletematkul($id)) {
+            redirect(site_url('admin/matakuliah'));
+        }
+    }
+    public function deletemhs($id, $kelasid)
+    {
+        $this->load->model("kelas_model");
+        if ($this->kelas_model->deletemahasiswa($id)) {
+            redirect(site_url('admin/kelas/' . $kelasid));
         }
     }
 
@@ -191,7 +211,7 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['matkul'] = $this->db->get('user_matkul')->result_array();
 
-        $this->form_validation->set_rules('matkul', 'Mata Kuliah', 'required');
+        $this->form_validation->set_rules('matkul', 'Mata Kuliah', 'required|trim');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -200,9 +220,27 @@ class Admin extends CI_Controller
             $this->load->view('admin/matakuliah', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->db->insert('user_matkul', ['matkul' => $this->input->post('matkul')]);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Lesson Added!</div>');
-            redirect('admin/matakuliah');
+            $upload_image = $_FILES['image']['name'];
+            if ($upload_image) {
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size'] = '2048';
+                $config['upload_path'] = './assets/images';
+
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('image')) {
+                    $new_image = $this->upload->data('file_name');
+                    $data1 = [
+                        'matkul' => $this->input->post('matkul'),
+                        'img_url' => 'assets/images/' . $new_image
+                    ];
+                    $this->db->insert('user_matkul', $data1);
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Lesson Added!</div>');
+                    redirect('admin/matakuliah');
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
         }
     }
     public function ClassManagement()
@@ -303,25 +341,5 @@ class Admin extends CI_Controller
         ];
         $this->db->insert('user_access_kelas', $data);
         redirect('admin/kelas/' . $pointer2);
-    }
-    public function absen()
-    {
-        $data['title'] = 'Absen Management';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['absen'] = $this->db->get('user_absensi')->result_array();
-
-        $this->form_validation->set_rules('matkul', 'Mata Kuliah', 'required');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('admin/absen', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $this->db->insert('user_matkul', ['matkul' => $this->input->post('matkul')]);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Lesson Added!</div>');
-            redirect('admin/matakuliah');
-        }
     }
 }

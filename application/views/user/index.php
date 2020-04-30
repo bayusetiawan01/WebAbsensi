@@ -23,7 +23,7 @@
             <div class="card mb-3 col">
                 <div class="row no-gutters">
                     <div class="col-md-3">
-                        <img src="<?= base_url() . $a['img_url'] ?>" class="card-img" alt="...">
+                        <img src="<?= base_url() . $a['img_url'] ?>" height="auto" width="220px" style="margin: auto" alt="...">
                     </div>
                     <div class="col-md-5">
                         <div class="card-body">
@@ -40,12 +40,19 @@
                             <?php $vara = "Belum ada kelas.";
                             $varb = 0;
                             $varc = 0;
+                            $vard = 0;
+                            $varf = time() - $varc;
+                            $vare = 0;
                             foreach ($kehadiran as $k) :
-                                if ($k['kelas_id'] == $a['id']) {
-                                    $vara = $k['keterangan'];
-                                    $varb = $k['tanggal'];
-                                    $varc = $k['time_per'];
-                                    $vard = $k['status_per'];
+                                if ($k['npm'] == $user['npm']) {
+                                    if ($k['kelas_id'] == $a['kelas_id']) {
+                                        $vara = $k['keterangan'];
+                                        $varb = $k['tanggal'];
+                                        $varc = $k['time_per'];
+                                        $vard = $k['status_per'];
+                                        $vare = $k['absen_id'];
+                                        $varf = time() - $varc;
+                                    }
                                 }
                             endforeach; ?>
                             <br>
@@ -53,19 +60,19 @@
                             <h5 style="text-align:left">Tanggal : <?= $varb ?></h5>
                             <br>
                             <?php if ($vard == 1) { ?>
-                                <button type="button" class="btn btn-success">Anda Sudah Menghadiri Kelas</button>
-                            <?php } else if (time() - $varc <= 300) { ?>
-                                <button type="button" class="btn btn-success">Hadiri Kelas</button>
+                                <button style="margin: 10px" type="button" class="btn btn-success">Anda Sudah Menghadiri Kelas</button>
+                            <?php } else if ($varf <= 300) { ?>
+                                <a style="margin: 10px" href="<?php echo site_url('user/sethadir/') . $vare . '/' . $varf ?>" class="btn btn-success">Hadiri Kelas</a>
                             <?php } else if ($varc == 0) { ?>
-                                <button type="button" class="btn btn-dark">Kelas Belum Tersedia</button>
+                                <button style="margin: 10px" type="button" class="btn btn-dark">Kelas Belum Tersedia</button>
                             <?php } else { ?>
-                                <button type="button" class="btn btn-secondary">Terlambat Menghadiri Kelas</button>
+                                <button style="margin: 10px" type="button" class="btn btn-secondary">Terlambat Menghadiri Kelas</button>
                             <?php } ?>
-                            <button type="button" class="btn btn-info">Detail Absensi</button>
+                            <button style="margin: 10px" type="button" class="btn btn-info">Detail Absensi</button>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <table class="table table-hover">
+                        <table class="table table-hover" style="max-height: 250px; overflow: auto; display:inline-block;">
                             <thead>
                                 <tr>
                                     <th scope="col">Tanggal</th>
@@ -74,14 +81,18 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($kehadiran as $k) :
-                                    if ($k['kelas_id'] == $a['id']) { ?>
-                                        <td><?= $k['tanggal']; ?></td>
-                                        <?php if ($k['status_per'] == 0) { ?>
-                                            <td>Tidak Hadir</td>
-                                        <?php } else { ?>
-                                            <td>Hadir</td>
-                                        <?php } ?>
+                                    if ($k['npm'] == $user['npm']) {
+                                        if ($k['kelas_id'] == $a['kelas_id']) { ?>
+                                            <tr>
+                                                <td><?= $k['tanggal'] . $k['absen_id']; ?></td>
+                                                <?php if ($k['status_per'] == 0) { ?>
+                                                    <td>Tidak Hadir</td>
+                                                <?php } else { ?>
+                                                    <td>Hadir</td>
+                                                <?php } ?>
+                                            </tr>
                                 <?php }
+                                    }
                                 endforeach; ?>
                             </tbody>
                         </table>

@@ -18,9 +18,9 @@
             <div class="column">
                 <div class="card" style="height: 400px">
                     <table>
-                        <tr><img src="<?= base_url() . $m['img_url'] ?>" class="card-img" height="200" alt="..."></tr>
+                        <tr><img src="<?= base_url() . $m['img_url'] ?>" style="margin: auto; margin-top: 10px; margin-bottom: 10px" height="200px" width="200px" alt="logo mata kuliah"></tr>
                         <tr>
-                            <h4 style="height: 70px; padding:5px"><?php echo $m['matkul']; ?></h4>
+                            <h4 style="height: 70px; padding:5px;"><?php echo $m['matkul']; ?></h4>
                         </tr>
                         <?php
                         $matkulId = $m['id'];

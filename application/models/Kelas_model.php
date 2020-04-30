@@ -4,13 +4,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Kelas_model extends CI_Model
 {
     private $_table = "user_matkul";
-
+    private $_table2 = "user_kelas";
+    private $_table3 = "user_access_kelas";
+    private $_table4 = "user_absen";
     public $id;
     public $matkul;
 
     public function getMahasiswa($p)
     {
-        $query = "SELECT `user_access_kelas`.*, `user`.*
+        $query = "SELECT `user_access_kelas`.*, `user`.`name`, `user`.`npm`
         FROM `user_access_kelas` JOIN `user` ON `user_access_kelas`.`npm` = `user`.`npm`
         WHERE kelas_id = $p";
 
@@ -37,8 +39,24 @@ class Kelas_model extends CI_Model
         FROM `user_absen` JOIN `user_kelas_pertemuan` ON `user_absen`.`pertemuan_id` = `user_kelas_pertemuan`.`id`";
         return $this->db->query($query)->result_array();
     }
-    public function delete($phapus)
+    public function deletematkul($phapus)
     {
-        return $this->db->delete($this->_table, array("matkul" => $phapus));
+        return $this->db->delete($this->_table, array("id" => $phapus));
+    }
+    public function deletekelas($id)
+    {
+        return $this->db->delete($this->_table2, array("id" => $id));
+    }
+    public function deletemahasiswa($id)
+    {
+        return $this->db->delete($this->_table3, array("id" => $id));
+    }
+    public function setHadir($pbantu, $p2)
+    {
+        if ($p2 <= 300) {
+            $this->db->set("status_per", 1);
+            $this->db->where("absen_id", $pbantu);
+            $this->db->update($this->_table4);
+        }
     }
 }
