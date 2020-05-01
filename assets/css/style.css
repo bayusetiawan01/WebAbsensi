@@ -6589,7 +6589,7 @@ a.text-purple:hover, a.text-purple:focus {
   color: #6a7a8c !important; }
 
 .text-muted {
-  color: #afb5c1 !important; }
+  color: #000 !important; }
 
 .text-black-50 {
   color: rgba(0, 0, 0, 0.5) !important; }
@@ -6914,7 +6914,7 @@ html[dir="ltr"] body .p-l-0 {
   /*This is for the logo bg*/
   /*This is for the sidebar bg*/
   #main-wrapper[data-layout="vertical"] .topbar .top-navbar .navbar-header[data-logobg="skin5"], #main-wrapper[data-layout="horizontal"] .topbar .top-navbar .navbar-header[data-logobg="skin5"] {
-    background: #233242; }
+    background: #2b3639; }
   #main-wrapper[data-layout="vertical"] .topbar .top-navbar .navbar-header[data-logobg="skin6"], #main-wrapper[data-layout="horizontal"] .topbar .top-navbar .navbar-header[data-logobg="skin6"] {
     background: #fff; }
     #main-wrapper[data-layout="vertical"] .topbar .top-navbar .navbar-header[data-logobg="skin6"] .navbar-brand .dark-logo, #main-wrapper[data-layout="horizontal"] .topbar .top-navbar .navbar-header[data-logobg="skin6"] .navbar-brand .dark-logo {
@@ -6924,15 +6924,15 @@ html[dir="ltr"] body .p-l-0 {
     #main-wrapper[data-layout="vertical"] .topbar .top-navbar .navbar-header[data-logobg="skin6"] .nav-toggler, #main-wrapper[data-layout="vertical"] .topbar .top-navbar .navbar-header[data-logobg="skin6"] .sidebartoggler, #main-wrapper[data-layout="vertical"] .topbar .top-navbar .navbar-header[data-logobg="skin6"] .topbartoggler, #main-wrapper[data-layout="horizontal"] .topbar .top-navbar .navbar-header[data-logobg="skin6"] .nav-toggler, #main-wrapper[data-layout="horizontal"] .topbar .top-navbar .navbar-header[data-logobg="skin6"] .sidebartoggler, #main-wrapper[data-layout="horizontal"] .topbar .top-navbar .navbar-header[data-logobg="skin6"] .topbartoggler {
       color: #6a7a8c; }
   #main-wrapper[data-layout="vertical"] .topbar .navbar-collapse[data-navbarbg="skin5"], #main-wrapper[data-layout="vertical"] .topbar[data-navbarbg="skin5"], #main-wrapper[data-layout="horizontal"] .topbar .navbar-collapse[data-navbarbg="skin5"], #main-wrapper[data-layout="horizontal"] .topbar[data-navbarbg="skin5"] {
-    background: #233242; }
+    background: #2b3639; }
   #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin5"], #main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin5"] {
-    background: #233242; }
+    background: #2b3639; }
     #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin5"] .sidebar-nav ul, #main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin5"] .sidebar-nav ul {
-      background: #233242; }
+      background: #2b3639; }
       #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin5"] .sidebar-nav ul .sidebar-item.selected > .sidebar-link, #main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin5"] .sidebar-nav ul .sidebar-item.selected > .sidebar-link {
-        border-left: 2px solid #137eff; }
+        border-left: 2px solid #e34c62; }
     #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin5"] .sidebar-nav > #sidebarnav > .sidebar-item > .sidebar-link:hover, #main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin5"] .sidebar-nav > #sidebarnav > .sidebar-item > .sidebar-link:hover {
-      border-left: 2px solid #137eff; }
+      border-left: 2px solid #e34c62; }
 
 /*============================================================== 
  For all pages 
@@ -6942,7 +6942,7 @@ html[dir="ltr"] body .p-l-0 {
   overflow: hidden; }
 
 .page-wrapper {
-  background: #f2f4f5;
+  background: #fecc;
   position: relative;
   transition: 0.2s ease-in;
   display: none; }
@@ -7415,11 +7415,13 @@ Notify
  General Topbar
 *******************/
 .topbar {
-  position: relative;
+  position: fixed;
+  width: 100%;
   z-index: 50;
   transition: 0.2s ease-in;
   box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.05);
-  background: #fff;
+  background: #ffd3b6;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   height: 64px; }
   .topbar .navbar-collapse {
     padding: 0px 10px 0 0; }

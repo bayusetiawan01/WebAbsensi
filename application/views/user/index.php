@@ -7,7 +7,7 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="card mb-3">
-        <img class="card-img-top" src="<?php echo base_url('assets/'); ?>images/matem.jpg" alt="Card image cap">
+        <img class="card-img-top" src="<?php echo base_url('assets/'); ?>images/absensi.png" alt="Card image cap">
     </div>
     <div class="card mb-3">
         <h1 class="h3 text-gray-800"><?= 'Selamat Datang di Web Absensi Praktikum Online' ?></h1>
