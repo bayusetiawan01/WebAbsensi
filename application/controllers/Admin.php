@@ -91,15 +91,17 @@ class Admin extends CI_Controller
         $this->email->from('absensipraktikum.mtk@gmail.com', 'Absensi Praktikum Matematika Unpad');
         $this->email->to($kirim['email']);
         if ($type == 'activation') {
-            $this->email->subject('Laporan Aktivasi Akun');
-            $this->email->message('Selamat akun anda sudah diaktivasi oleh Admin!
+            $this->email->subject('Account Activation Report');
+            $this->email->message('Congratulations your account has been activated by Admin!
             Click this link to login : <a href="' . base_url() . '">Link</a>');
         } elseif ($type == 'deactivation') {
-            $this->email->subject('Laporan Penonaktifan Akun');
-            $this->email->message('Maaf akun anda dinonaktifkan oleh Admin! Silahkan hubungi Asisten Laboratorium untuk informasi lebih lanjut');
+            $this->email->subject('Account Deactivation Report');
+            $this->email->message('Sorry, your account has been disabled by Admin! 
+                Please contact the Laboratory Assistant for more information');
         } else {
-            $this->email->subject('Laporan Penghapusan Akun');
-            $this->email->message('Maaf akun anda dihapus oleh Admin! Silahkan hubungi Asisten Laboratorium untuk informasi lebih lanjut');
+            $this->email->subject('Account Deletion Report');
+            $this->email->message('Sorry, your account has been deleted by Admin!
+                Please contact the Laboratory Assistant for more information');
         }
 
 
@@ -342,4 +344,6 @@ class Admin extends CI_Controller
         $this->db->insert('user_access_kelas', $data);
         redirect('admin/kelas/' . $pointer2);
     }
+
+    
 }

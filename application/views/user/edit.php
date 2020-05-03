@@ -5,6 +5,7 @@
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
+    <br><br>
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <div class="row">
         <div class="card mb-3 col-lg-8">
@@ -16,6 +17,14 @@
                         <input type="text" class="form-control" id="email" name="email" value="<?php echo $user['email']; ?>" readonly>
                     </div>
                 </div>
+                <br>
+                <div class="form-group row">
+                    <label for="npm" class="col-sm-2 col-form-label">NPM</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="npm" name="npm" value="<?php echo $user['npm']; ?>" readonly>
+                    </div>
+                </div>
+                <br>
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Full name</label>
                     <div class="col-sm-10">
@@ -23,6 +32,7 @@
                         <?= form_error('name', '<small class"text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
+                <br>
                 <div class=" form-group row">
                     <div class="col-sm-2">Picture</div>
                     <div class="col-sm-10">
@@ -39,6 +49,7 @@
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="form-group row justify-content-end">
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-primary">Edit</button>

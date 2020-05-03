@@ -222,6 +222,9 @@ class Auth extends CI_Controller
 
     public function forgotPassword()
     {
+        if ($this->session->userdata('email')) {
+            redirect('user');
+        }
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/auth_header');
@@ -255,6 +258,9 @@ class Auth extends CI_Controller
 
     public function resetPassword()
     {
+        if ($this->session->userdata('email')) {
+            redirect('user');
+        }
         $email = $this->input->get('email');
         $token = $this->input->get('token');
 

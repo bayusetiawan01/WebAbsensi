@@ -16,4 +16,9 @@ class Submenu_model extends CI_Model
     {
         return $this->db->delete($this->_table, array("title" => $phapus));
     }
+
+    public function edit($id)
+    {
+        return $this->db->get_where($this->_table,array("id"=>$id));
+    }
 }

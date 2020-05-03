@@ -16,7 +16,7 @@
             <input class="input100" type="password" id="password1" name="password1" placeholder="Enter new password ...">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <i class="fa fa-lock" aria-hidden="true"></i>
             </span>
             <?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
         </div>
@@ -25,7 +25,7 @@
             <input class="input100" type="password" id="password2" name="password2" placeholder="Repeat password ...">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <i class="fa fa-key" aria-hidden="true"></i>
             </span>
             <?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
         </div>
