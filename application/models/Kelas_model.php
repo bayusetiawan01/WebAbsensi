@@ -51,12 +51,23 @@ class Kelas_model extends CI_Model
     {
         return $this->db->delete($this->_table3, array("id" => $id));
     }
-    public function setHadir($pbantu, $p2)
+    public function setHadir($pbantu, $p2, $lat, $long)
     {
-        if ($p2 <= 300) {
+        if ($p2 <= 120) {
             $this->db->set("status_per", 1);
+            $this->db->set("latitude", $lat);
+            $this->db->set("longitude", $long);
             $this->db->where("absen_id", $pbantu);
             $this->db->update($this->_table4);
         }
+    }
+    public function siswaHadir($p)
+    {
+        $query = "SELECT `user_absen`.*, `user`.`name`, `user_kelas_pertemuan`.`kelas_id`
+        FROM `user_absen` JOIN `user_kelas_pertemuan` ON `user_kelas_pertemuan`.`id` = `user_absen`.`pertemuan_id`
+        JOIN `user` ON `user_absen`.`npm` = `user`.`npm`
+        WHERE pertemuan_id = $p";
+
+        return $this->db->query($query)->result_array();
     }
 }

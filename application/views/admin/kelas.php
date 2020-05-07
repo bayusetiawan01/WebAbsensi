@@ -5,6 +5,7 @@
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
+    <br><br>
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newKelasModal">Add New Class</a>
     <a href="<?= base_url(); ?>admin/matakuliah" class="btn btn-primary mb-3">Edit Mata Kuliah</a>
@@ -19,7 +20,7 @@
                 <?php endif; ?>
                 <?= $this->session->flashdata('message'); ?>
 
-                <table class="table table-hover">
+                <table class="table table-hover table-responsive-lg">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -66,7 +67,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('admin/kelas'); ?>" method="post">
+            <form action="<?= base_url('admin/classmanagement'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="text" class="form-control" id="title" name="title" placeholder="Class title">
@@ -98,4 +99,4 @@
             </form>
         </div>
     </div>
-</div>
+</div><br><br>

@@ -213,7 +213,7 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['matkul'] = $this->db->get('user_matkul')->result_array();
 
-        $this->form_validation->set_rules('matkul', 'Mata Kuliah', 'required|trim');
+        $this->form_validation->set_rules('matkul', 'Mata Kuliah', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -226,7 +226,7 @@ class Admin extends CI_Controller
             if ($upload_image) {
                 $config['allowed_types'] = 'gif|jpg|png|jpeg';
                 $config['max_size'] = '2048';
-                $config['upload_path'] = './assets/images';
+                $config['upload_path'] = './assets/images/kelas';
 
                 $this->load->library('upload', $config);
 
@@ -234,7 +234,7 @@ class Admin extends CI_Controller
                     $new_image = $this->upload->data('file_name');
                     $data1 = [
                         'matkul' => $this->input->post('matkul'),
-                        'img_url' => 'assets/images/' . $new_image
+                        'img_url' => 'assets/images/kelas/' . $new_image
                     ];
                     $this->db->insert('user_matkul', $data1);
                     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Lesson Added!</div>');
@@ -271,7 +271,7 @@ class Admin extends CI_Controller
             ];
             $this->db->insert('user_kelas', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Class Added!</div>');
-            redirect('admin/kelas');
+            redirect('admin/classmanagement');
         }
     }
 
@@ -344,6 +344,29 @@ class Admin extends CI_Controller
         $this->db->insert('user_access_kelas', $data);
         redirect('admin/kelas/' . $pointer2);
     }
+    public function siswahadir($idper)
+    {
+        $data['title'] = 'Kehadiran Mahasiswa';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->model('Kelas_model', 'model1');
+        $data['mahasiswa'] = $this->model1->siswaHadir($idper);
 
-    
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('daftarkelas/mahasiswahadir', $data);
+        $this->load->view('templates/footer');
+    }
+    public function lokasi($lat, $long)
+    {
+        $data['title'] = 'Lokasi Mahasiswa';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['latitude'] = $lat;
+        $data['longitude'] = $long;
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('daftarkelas/peta', $data);
+        $this->load->view('templates/footer');
+    }
 }

@@ -418,6 +418,7 @@ iframe {
 @media (max-width: 992px) {
   .container-baru {
     width: 100%;
+    color: aliceblue;
   }
   .wrap-login100 {
     width: 100%;
@@ -435,6 +436,8 @@ iframe {
 @media (max-width: 768px) {
   .container-baru {
     width: 100%;
+    padding: 0px;
+    padding-top: 10px;
     text-align: center;
   }
   .wrap-login100 {
@@ -445,6 +448,8 @@ iframe {
     width: 100%;
     text-align: center;
     margin-bottom: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
   }
   .regis{
     padding-top: 30px;

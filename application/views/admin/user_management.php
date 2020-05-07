@@ -5,6 +5,7 @@
   <!-- ============================================================== -->
   <!-- Start Page Content -->
   <!-- ============================================================== -->
+  <br><br>
   <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
   <div class="card">
@@ -18,7 +19,7 @@
 
         <?= $this->session->flashdata('message'); ?>
 
-        <table class="table table-hover">
+        <table class="table table-hover table-responsive-lg">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -114,3 +115,4 @@
     </div>
   </div>
 </div>
+<br><br><br><br><br><br><br><br><br><br><br><br>

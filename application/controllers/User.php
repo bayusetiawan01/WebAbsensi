@@ -82,9 +82,6 @@ class User extends CI_Controller
 
     public function changePassword()
     {
-        if ($this->session->userdata('email')) {
-            redirect('user');
-        }
         $data['title'] = 'Change Password';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
@@ -138,8 +135,10 @@ class User extends CI_Controller
     }
     public function setHadir($pointer, $p2)
     {
+        $latitude = $_GET['lat'];
+        $longitude = $_GET['long'];
         $this->load->model("kelas_model");
-        $this->kelas_model->setHadir($pointer, $p2);
+        $this->kelas_model->setHadir($pointer, $p2, $longitude, $latitude);
         redirect(site_url('user/'));
     }
 }

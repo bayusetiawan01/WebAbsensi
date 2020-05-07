@@ -22,5 +22,5 @@
             <div class="container-baru">
                 <p style="color: aliceblue">
                     <img src="<?php echo base_url('assets/'); ?>images/logo.png" width="50" alt="IMG" style="margin-right: 10px">
-                    <strong>Asisten Laboratorium Matematika Unpad</strong>
+                    <strong>Asisten Laboratorium Matematika</strong>
                 </p>

@@ -1126,6 +1126,8 @@ pre {
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.05); }
 
+.table-hover thead {
+  background-color: #e34c62; color: aliceblue; }
 .table-hover tbody tr:hover {
   background-color: #f6fafe; }
 
@@ -1738,14 +1740,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #7460ee;
-  border-color: #7460ee; }
+  background-color: #e34c62;
+  border-color: #e34c62; }
   .btn-primary:hover {
     color: #fff;
-    background-color: #563dea;
-    border-color: #4c32e9; }
+    background-color: #c54054;
+    border-color: #e34c62; }
   .btn-primary:focus, .btn-primary.focus {
-    box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5); }
+    box-shadow: 0 0 0 0.2rem rgba(238, 96, 120, 0.5); }
   .btn-primary.disabled, .btn-primary:disabled {
     color: #fff;
     background-color: #7460ee;

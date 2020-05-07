@@ -5,6 +5,7 @@
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
+    <br><br>
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
 
@@ -16,7 +17,7 @@
     <div class="row">
         <?php foreach ($matkul as $m) : ?>
             <div class="column">
-                <div class="card" style="height: 400px">
+                <div class="card" style="height: 450px">
                     <table>
                         <tr><img src="<?= base_url() . $m['img_url'] ?>" style="margin: auto; margin-top: 10px; margin-bottom: 10px" height="200px" width="200px" alt="lesson logo"></tr>
                         <tr>
@@ -32,7 +33,7 @@
                         $kelas = $this->db->query($queryKelas)->result_array();
                         ?>
                         <?php foreach ($kelas as $k) : ?>
-                            <a href="<?php echo base_url('admin/kelas/' . $k['id']); ?>">
+                            <a class="btn btn-primary" style="margin: 2px" href="<?php echo base_url('admin/kelas/' . $k['id']); ?>">
                                 <span><?= $k['title']; ?></span>
                             </a>
                         <?php endforeach; ?>
@@ -41,7 +42,7 @@
             </div>
         <?php endforeach; ?>
     </div>
-
+    <br><br><br><br><br><br><br><br><br><br><br><br>
     <!-- SUB MENU -->
 
 </div>
