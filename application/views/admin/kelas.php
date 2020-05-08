@@ -7,7 +7,7 @@
     <!-- ============================================================== -->
     <br><br>
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-    <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newKelasModal">Add New Class</a>
+    <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newKelasModal">Tambah Kelas Baru</a>
     <a href="<?= base_url(); ?>admin/matakuliah" class="btn btn-primary mb-3">Edit Mata Kuliah</a>
 
     <div class="card">
@@ -24,10 +24,10 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Title</th>
+                            <th scope="col">Judul</th>
                             <th scope="col">Mata Kuliah</th>
-                            <th scope="col">Active</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Aktif</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,7 +62,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newKelasLabel">Add New Class</h5>
+                <h5 class="modal-title" id="newKelasLabel">Tambah Kelas Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -75,7 +75,7 @@
 
                     <div class="form-group">
                         <select name="matkul_id" id="matkul_id" class="form-control">
-                            <option value="">Select Mata Kuliah</option>
+                            <option value="">Pilih Mata Kuliah</option>
                             <?php foreach ($matkul as $m) : ?>
                                 <option value="<?= $m['id']; ?>"><?= $m['matkul']; ?></option>
                             <?php endforeach; ?>
@@ -86,15 +86,15 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" checked>
                             <label class="form-check-label" for="is_active">
-                                Active?
+                                Aktif
                             </label>
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
             </form>
         </div>

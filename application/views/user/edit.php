@@ -26,7 +26,7 @@
                 </div>
                 <br>
                 <div class="form-group row">
-                    <label for="name" class="col-sm-2 col-form-label">Full name</label>
+                    <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="name" name="name" value="<?php echo $user['name']; ?>">
                         <?= form_error('name', '<small class"text-danger pl-3">', '</small>'); ?>
@@ -34,7 +34,7 @@
                 </div>
                 <br>
                 <div class=" form-group row">
-                    <div class="col-sm-2">Picture</div>
+                    <div class="col-sm-2">Gambar</div>
                     <div class="col-sm-10">
                         <div class="row">
                             <div class="col-sm-3">
@@ -43,7 +43,7 @@
                             <div class="col-sm-9">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="image" name="image">
-                                    <label class="custom-file-label" for="image">Choose file</label>
+                                    <label class="custom-file-label" for="image">Pilih file</label>
                                 </div>
                             </div>
                         </div>

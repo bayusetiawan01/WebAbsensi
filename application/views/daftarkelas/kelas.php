@@ -8,6 +8,9 @@
         <br>
         <br>
         <?php
+        $tanggal = 0;
+        $keterangan = "Belum ada Pertemuan";
+        $id = 0;
         foreach ($pertemuan as $pt) :
             $tanggal = $pt['tanggal'];
             $keterangan = $pt['keterangan'];

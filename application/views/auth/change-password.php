@@ -5,7 +5,7 @@
 
     <form class="login100-form validate-form" method="post" action="<?= base_url('auth/changepassword') ?>">
         <span class="login100-form-title">
-            Change your password for
+            Ganti Passwordmu
             <h5><?= $this->session->userdata('reset_email') ?></h5>
         </span>
         <small>
@@ -32,7 +32,7 @@
 
         <div class="container-login100-form-btn">
             <button type="submit" class="login100-form-btn button_hover">
-                Change Password
+                Ganti Password
             </button>
         </div>
 

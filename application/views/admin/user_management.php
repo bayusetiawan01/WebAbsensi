@@ -26,8 +26,8 @@
               <th scope="col">Nama</th>
               <th scope="col">NPM</th>
               <th scope="col">Email</th>
-              <th scope="col">Date</th>
-              <th scope="col">Action</th>
+              <th scope="col">Tanggal</th>
+              <th scope="col">Aksi</th>
               <th scope="col">Status</th>
             </tr>
           </thead>
@@ -78,7 +78,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newMenuModalLabel">Add User</h5>
+        <h5 class="modal-title" id="newMenuModalLabel">Tambah User</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -101,15 +101,15 @@
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" checked>
               <label class="form-check-label" for="is_active">
-                Active?
+                Actif?
               </label>
             </div>
           </div>
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-primary">Tambah</button>
         </div>
       </form>
     </div>

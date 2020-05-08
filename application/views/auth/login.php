@@ -5,7 +5,7 @@
 
     <form class="login100-form validate-form" method="post" action="<?= base_url('auth') ?>">
         <span class="login100-form-title">
-            Login Page
+            Halaman Login
         </span>
         <small>
             <?= $this->session->flashdata('message'); ?>
@@ -30,7 +30,7 @@
         </div>
         <div class="text-left pl-3">
             <a class="txt2" href="<?= base_url('auth/forgotpassword'); ?>">
-                Forgot Password?
+                Lupa Password?
             </a>
         </div>
         <div class="container-login100-form-btn">
@@ -41,7 +41,7 @@
         <hr>
         <div class="text-center">
             <a class="txt2" href="<?= base_url('registration'); ?>">
-                Create your Account
+                Registrasi Akun
                 <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
             </a>
         </div>

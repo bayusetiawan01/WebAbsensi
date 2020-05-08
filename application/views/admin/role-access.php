@@ -20,7 +20,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Menu</th>
-                        <th scope="col">Access</th>
+                        <th scope="col">Akses</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,7 +42,7 @@
                 </tbody>
             </table>
 
-
+            <a onclick="history.back(-1)" style="color: white" class="btn btn-primary mb-3 ml-5">Kembali</a>
 
         </div>
     </div>

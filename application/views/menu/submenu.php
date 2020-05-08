@@ -8,7 +8,7 @@
   <br><br>
   <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
-  <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">Add New submenu</a>
+  <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">Tambah Submenu Baru</a>
   <div class="card">
     <div class="row">
       <div class="col-lg">
@@ -25,12 +25,12 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Title</th>
+              <th scope="col">Judul</th>
               <th scope="col">Menu</th>
               <th scope="col">Url</th>
               <th scope="col">Icon</th>
-              <th scope="col">Active</th>
-              <th scope="col">Action</th>
+              <th scope="col">Aktif</th>
+              <th scope="col">Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -44,8 +44,7 @@
                 <td><?= $sm['icon']; ?></td>
                 <td><?= $sm['is_active']; ?></td>
                 <td>
-                  <a href="<?= base_url(); ?>menu/editsubmenu/<?= $sm['id']; ?>" class="badge badge-success">edit</a>
-                  <a href="<?= base_url(); ?>menu/hapussubmenu/<?= $sm['title']; ?>" class="badge badge-danger">Delete</a>
+                  <a href="<?= base_url(); ?>menu/hapussubmenu/<?= $sm['title']; ?>" class="badge badge-danger">delete</a>
                 </td>
               </tr>
               <?php $i++; ?>
@@ -69,7 +68,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newMenuModalLabel">Add New Sub Menu</h5>
+        <h5 class="modal-title" id="newMenuModalLabel">Tambah Submenu Baru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -82,7 +81,7 @@
 
           <div class="form-group">
             <select name="menu_id" id="menu_id" class="form-control">
-              <option value="">Select Menu</option>
+              <option value="">Pilih Menu</option>
               <?php foreach ($menu as $m) : ?>
                 <option value="<?= $m['id']; ?>"><?= $m['menu']; ?></option>
               <?php endforeach; ?>
@@ -101,15 +100,15 @@
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" checked>
               <label class="form-check-label" for="is_active">
-                Active?
+                Aktif?
               </label>
             </div>
           </div>
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-primary">Tambah</button>
         </div>
       </form>
     </div>

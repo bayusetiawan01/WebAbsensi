@@ -14,7 +14,7 @@
             <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
 
             <?= $this->session->flashdata('message'); ?>
-            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newRoleModal">Add New Role</a>
+            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newRoleModal">Tambah Role</a>
             <div class="card">
 
                 <table class="table table-hover">
@@ -24,7 +24,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Role</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +34,7 @@
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $r['role']; ?></td>
                                 <td>
-                                    <a href="<?= base_url('admin/roleaccess/') . $r['id']; ?>" class="badge badge-warning">access</a>
+                                    <a href="<?= base_url('admin/roleaccess/') . $r['id']; ?>" class="badge badge-warning">akses</a>
                                 </td>
                             </tr>
                             <?php $i++; ?>
@@ -59,7 +59,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newRoleModalLabel">Add New Role</h5>
+                <h5 class="modal-title" id="newRoleModalLabel">Tambah Role</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -71,8 +71,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
 
                 </div>
             </form>

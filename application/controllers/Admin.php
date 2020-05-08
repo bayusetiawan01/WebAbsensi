@@ -22,7 +22,7 @@ class Admin extends CI_Controller
     }
     public function usermanagement()
     {
-        $data['title'] = 'User Management';
+        $data['title'] = 'Manajemen User';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['member'] = $this->db->get('user')->result_array();
 
@@ -128,7 +128,7 @@ class Admin extends CI_Controller
 
     public function roleAccess($role_id)
     {
-        $data['title'] = 'Role Access';
+        $data['title'] = 'Akses Role';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['role'] = $this->db->get_where('user_role', ['id' => $role_id])->row_array();
 
@@ -161,7 +161,7 @@ class Admin extends CI_Controller
         }
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Access Changed!</div>');
+        Akses diganti!</div>');
     }
 
     public function setAdmin($pointer)
@@ -198,18 +198,17 @@ class Admin extends CI_Controller
                 $this->_sendEmail($token, 'forgot');
 
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-                Please check your email to reset your password!</div>');
+                    Silakan periksa email Anda untuk mengatur ulang kata sandi Anda!</div>');
                 redirect('auth');
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                Email is not registered or activated!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email tidak terdaftar atau diaktifkan!</div>');
                 redirect('auth/forgotpassword');
             }
         }
     }
     public function matakuliah()
     {
-        $data['title'] = 'Class Management';
+        $data['title'] = 'Manajemen Kelas';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['matkul'] = $this->db->get('user_matkul')->result_array();
 
@@ -237,7 +236,7 @@ class Admin extends CI_Controller
                         'img_url' => 'assets/images/kelas/' . $new_image
                     ];
                     $this->db->insert('user_matkul', $data1);
-                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Lesson Added!</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mata Kuliah Baru ditambahkan!</div>');
                     redirect('admin/matakuliah');
                 } else {
                     echo $this->upload->display_errors();
@@ -247,7 +246,7 @@ class Admin extends CI_Controller
     }
     public function ClassManagement()
     {
-        $data['title'] = 'Class Management';
+        $data['title'] = 'Manajemen Kelas';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->model('Kelas_model', 'kelas');
 
@@ -270,7 +269,7 @@ class Admin extends CI_Controller
                 'is_active' => $this->input->post('is_active')
             ];
             $this->db->insert('user_kelas', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Class Added!</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kelas Baru ditambahkan!</div>');
             redirect('admin/classmanagement');
         }
     }
@@ -368,5 +367,16 @@ class Admin extends CI_Controller
         $this->load->view('templates/sidebar', $data);
         $this->load->view('daftarkelas/peta', $data);
         $this->load->view('templates/footer');
+    }
+    public function export_pdf()
+    {
+        $this->load->library('pdf');
+        $data = $this->detail_data_absen();
+        $html_content = $this->load->view('absensi/print_pdf', $data, true);
+        $filename = 'Absensi ' . $data['karyawan']->nama . ' - ' . bulan($data['bulan']) . ' ' . $data['tahun'] . '.pdf';
+
+        $this->pdf->loadHtml($html_content);
+        $this->pdf->render();
+        $this->pdf->stream($filename, ['Attachment' => 1]);
     }
 }

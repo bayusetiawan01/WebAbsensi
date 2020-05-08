@@ -5,7 +5,7 @@
 
     <form class="login100-form validate-form" method="post" action="<?= base_url('auth/forgotpassword') ?>">
         <span class="login100-form-title">
-            Forgot your Password ?
+            Lupa Passwordmu ?
         </span>
         <small>
             <?= $this->session->flashdata('message'); ?>
@@ -29,7 +29,7 @@
 
         <div class="text-center">
             <a class="txt2" href="<?= base_url(''); ?>">
-                Back to Login
+                Kembali ke Login
                 <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
             </a>
         </div>

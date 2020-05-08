@@ -8,7 +8,7 @@
   <br><br>
   <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
-  <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
+  <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Tambah Menu Baru</a>
   <div class="card">
     <div class="row">
       <div class="col-lg-6">
@@ -23,7 +23,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Menu</th>
-              <th scope="col">Action</th>
+              <th scope="col">Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -33,8 +33,7 @@
                 <th scope="row"><?= $i; ?></th>
                 <td><?= $m['menu']; ?></td>
                 <td>
-                  <a href="<?= base_url(); ?>menu/edit/<?= $m['menu']; ?>" class="badge badge-success">edit</a>
-                  <a href="<?= base_url(); ?>menu/hapusmenu/<?= $m['menu']; ?>" class="badge badge-danger" onclick="return confirm('sure?');">delete</a>
+                <a href="<?= base_url(); ?>menu/hapusmenu/<?= $m['menu']; ?>" class="badge badge-danger" onclick="return confirm('sure?');">delete</a>
                 </td>
               </tr>
               <?php $i++; ?>
@@ -58,7 +57,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newMenuModalLabel">Add New Menu</h5>
+        <h5 class="modal-title" id="newMenuModalLabel">Tambah Menu Baru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -70,8 +69,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-primary">Tambah</button>
 
         </div>
       </form>
