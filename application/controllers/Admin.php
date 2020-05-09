@@ -316,7 +316,7 @@ class Admin extends CI_Controller
                 'kelas_id' => $this->input->post('kelas_id'),
                 'tanggal' => $this->input->post('tanggal'),
                 'keterangan' => $this->input->post('keterangan'),
-                'time_per' => time()
+                'time_per' => time(),
             ];
             $this->db->insert('user_kelas_pertemuan', $data);
             $pertemuan = $this->db->get('user_kelas_pertemuan')->result_array();
@@ -327,7 +327,9 @@ class Admin extends CI_Controller
                 $data3 = [
                     'npm' => $m['npm'],
                     'pertemuan_id' => $perid,
-                    'status_per' => 0
+                    'status_per' => 0,
+                    'latitude' => 0,
+                    'longitude' => 0,
                 ];
                 $this->db->insert('user_absen', $data3);
             endforeach;
@@ -362,13 +364,9 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['latitude'] = $lat;
         $data['longitude'] = $long;
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('templates/sidebar', $data);
         $this->load->view('daftarkelas/peta', $data);
-        $this->load->view('templates/footer');
     }
-    public function export_pdf()
+    /*public function export_pdf()
     {
         $this->load->library('pdf');
         $data = $this->detail_data_absen();
@@ -378,5 +376,5 @@ class Admin extends CI_Controller
         $this->pdf->loadHtml($html_content);
         $this->pdf->render();
         $this->pdf->stream($filename, ['Attachment' => 1]);
-    }
+    }*/
 }

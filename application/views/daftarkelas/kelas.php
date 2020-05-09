@@ -8,6 +8,7 @@
         <br>
         <br>
         <?php
+        $random = 0;
         $tanggal = 0;
         $keterangan = "Belum ada Pertemuan";
         $id = 0;
@@ -15,6 +16,7 @@
             $tanggal = $pt['tanggal'];
             $keterangan = $pt['keterangan'];
             $id = $pt['id'];
+            $random = $pt['time_per'];
         endforeach;
         $query = "SELECT `status_per` FROM `user_absen` WHERE `pertemuan_id` = $id";
         $var = $this->db->query($query)->result_array();
@@ -29,7 +31,7 @@
         <div class="card mb-3 col">
             <div class="row no-gutters">
                 <div class="col-md-3">
-                    <img id='barcode' src=<?php echo "https://api.qrserver.com/v1/create-qr-code/?data=" . $keterangan ?> alt="" title="QR Code" width="200" height="200" />
+                    <img id='barcode' src=<?php echo "https://api.qrserver.com/v1/create-qr-code/?data=" . $random ?> alt="" title="QR Code" width="200" height="200" />
                     <br>
                 </div>
                 <div class="col-md-4" style="margin: auto">

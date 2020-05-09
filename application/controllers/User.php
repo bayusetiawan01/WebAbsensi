@@ -133,12 +133,21 @@ class User extends CI_Controller
             }
         }
     }
-    public function setHadir($pointer, $p2)
+    public function scanner($pointer, $p2, $code)
     {
-        $latitude = $_GET['lat'];
-        $longitude = $_GET['long'];
+        $data['lat'] = $_GET['lat'];
+        $data['long'] = $_GET['long'];
+        $data['absenid'] = $pointer;
+        $data['time'] = $p2;
+        $data['code'] = $code;
+        $data['title'] = 'QR Scanner';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->view('daftarkelas/qrscanner', $data);
+    }
+    public function setHadir($pointer, $p2, $code, $longitude, $latitude)
+    {
+        $res = $_GET['res'];
         $this->load->model("kelas_model");
-        $this->kelas_model->setHadir($pointer, $p2, $longitude, $latitude);
-        redirect(site_url('user/'));
+        $this->kelas_model->setHadir($pointer, $p2, $code, $longitude, $latitude, $res);
     }
 }

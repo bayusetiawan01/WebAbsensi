@@ -51,14 +51,25 @@ class Kelas_model extends CI_Model
     {
         return $this->db->delete($this->_table3, array("id" => $id));
     }
-    public function setHadir($pbantu, $p2, $lat, $long)
+    public function setHadir($pbantu, $p2, $code, $lat, $long, $res)
     {
-        if ($p2 <= 120) {
+        if ($p2 <= 180 && $res == $code) {
             $this->db->set("status_per", 1);
             $this->db->set("latitude", $lat);
             $this->db->set("longitude", $long);
             $this->db->where("absen_id", $pbantu);
             $this->db->update($this->_table4);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Selamat anda berhasil mengisi absensi!</div>');
+            redirect('user/');
+        } elseif ($res != $code) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            QR Code Tidak Cocok, Coba Lagi!</div>');
+            redirect('user/');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Maaf waktu habis, Anda gagal mengisi absensi!</div>');
+            redirect('user/');
         }
     }
     public function siswaHadir($p)

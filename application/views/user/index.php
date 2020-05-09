@@ -1,8 +1,7 @@
 <!-- ============================================================== -->
 <!-- Container fluid  -->
 <!-- ============================================================== -->
-<br>
-        <br>
+<br><br>
 <div class="container-fluid">
     <!-- ============================================================== -->
     <!-- Start Page Content -->
@@ -66,7 +65,7 @@
                                     }
 
                                     function redirectToPosition(position) {
-                                        window.location = '<?php echo site_url('user/sethadir/') . $vare . '/' . $varf ?>?lat=' + position.coords.latitude + '&long=' + position.coords.longitude;
+                                        window.location = '<?php echo site_url('user/scanner/') . $vare . '/' . $varf . '/' . $varc ?>?lat=' + position.coords.latitude + '&long=' + position.coords.longitude;
                                     }
                                 </script>
                                 <a style="margin: 10px; color:white;" onclick="getAbsen()" class="btn btn-success">Hadiri Kelas</a>
