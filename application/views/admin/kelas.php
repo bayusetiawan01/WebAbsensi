@@ -10,6 +10,8 @@
     <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newKelasModal">Tambah Kelas Baru</a>
     <a href="<?= base_url(); ?>admin/matakuliah" class="btn btn-primary mb-3">Edit Mata Kuliah</a>
 
+    <a href="<?= base_url(); ?>admin/kelas_pdf" class="btn btn-primary mb-3">Eksport PDF</a>
+
     <div class="card">
         <div class="row">
             <div class="col-lg">
@@ -17,7 +19,7 @@
                     <div class="alert alert-danger" role="alert">
                         <?= validation_errors(); ?>
                     </div>
-                <?php endif; ?>
+                <?php endif; ?> 
                 <?= $this->session->flashdata('message'); ?>
 
                 <table class="table table-hover table-responsive-lg">

@@ -8,6 +8,8 @@
   <br><br>
   <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
+  <a class="btn btn-primary mb-3" href="<?php echo base_url('admin/pdf') ?>">Eksport PDF</a>
+
   <div class="card">
     <div class="row">
       <div class="col-lg">
@@ -42,10 +44,10 @@
                 <td><?= date('d F Y', $m['date_created']); ?></td>
                 <td>
                   <?php if ($m['is_active'] == 0) { ?>
-                    <a href="<?php echo site_url('admin/aktivasi/') . $m['npm'] ?>" class="badge badge-success">Active</a>
+                    <a href="<?php echo site_url('admin/aktivasi/') . $m['npm'] ?>" class="badge badge-success">Aktifkan</a>
                     <a href="<?php echo site_url('admin/delete/') . $m['npm'] ?>" class="badge badge-danger">Delete</a>
                   <?php } else { ?>
-                    <a href="<?php echo site_url('admin/deaktivasi/') . $m['npm'] ?>" class="badge badge-warning">Nonactive</a>
+                    <a href="<?php echo site_url('admin/deaktivasi/') . $m['npm'] ?>" class="badge badge-warning">Nonaktif</a>
                   <?php } ?>
                 </td>
                 <td>

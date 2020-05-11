@@ -55,8 +55,8 @@ class Kelas_model extends CI_Model
     {
         if ($p2 <= 180 && $res == $code) {
             $this->db->set("status_per", 1);
-            $this->db->set("latitude", $lat);
-            $this->db->set("longitude", $long);
+            $this->db->set("latitude", $long);
+            $this->db->set("longitude", $lat);
             $this->db->where("absen_id", $pbantu);
             $this->db->update($this->_table4);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
@@ -80,5 +80,9 @@ class Kelas_model extends CI_Model
         WHERE pertemuan_id = $p";
 
         return $this->db->query($query)->result_array();
+    }
+    public function data_user()
+    {
+        return $this->db->get('user');
     }
 }

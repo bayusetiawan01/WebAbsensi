@@ -351,6 +351,7 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->model('Kelas_model', 'model1');
         $data['mahasiswa'] = $this->model1->siswaHadir($idper);
+        $data['idper'] = $idper;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);
@@ -366,15 +367,59 @@ class Admin extends CI_Controller
         $data['longitude'] = $long;
         $this->load->view('daftarkelas/peta', $data);
     }
-    /*public function export_pdf()
-    {
-        $this->load->library('pdf');
-        $data = $this->detail_data_absen();
-        $html_content = $this->load->view('absensi/print_pdf', $data, true);
-        $filename = 'Absensi ' . $data['karyawan']->nama . ' - ' . bulan($data['bulan']) . ' ' . $data['tahun'] . '.pdf';
 
-        $this->pdf->loadHtml($html_content);
-        $this->pdf->render();
-        $this->pdf->stream($filename, ['Attachment' => 1]);
-    }*/
+    public function pdf()
+    {
+        $this->load->library('dompdf_gen');
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->model('data_model');
+        $data['mahasiswa'] = $this->data_model->data('user')->result();
+        $this->load->view('user/user_pdf',$data);
+
+        $paper_size = 'A4';
+        $orientation = 'potrait';
+        $html = $this->output->get_output();
+        $this->dompdf->set_paper($paper_size, $orientation);
+
+        $this->dompdf->load_html($html);
+        $this->dompdf->render();
+        $this->dompdf->stream("Daftar_user.pdf", array('Attachment'=>0));
+    }
+    public function kelas_pdf()
+    {
+        $this->load->library('dompdf_gen');
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->model('data_model');
+        $data['kelas'] = $this->data_model->data_kelas('user_kelas')->result();
+        $this->load->view('admin/kelas_pdf',$data);
+
+        $paper_size = 'A4';
+        $orientation = 'potrait';
+        $html = $this->output->get_output();
+        $this->dompdf->set_paper($paper_size, $orientation);
+
+        $this->dompdf->load_html($html);
+        $this->dompdf->render();
+        $this->dompdf->stream("Daftar_kelas.pdf", array('Attachment'=>0));
+    }
+    public function siswahadir_pdf($idper)
+    {
+        $this->load->library('dompdf_gen');
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->model('kelas_model');
+        $data['hadir'] = $this->kelas_model->siswaHadir($idper);
+        $this->load->view('admin/siswahadir_pdf',$data);
+
+        $paper_size = 'A4';
+        $orientation = 'potrait';
+        $html = $this->output->get_output();
+        $this->dompdf->set_paper($paper_size, $orientation);
+
+        $this->dompdf->load_html($html);
+        $this->dompdf->render();
+        $this->dompdf->stream("Kehadiran_Mahasiswa.pdf", array('Attachment'=>0));
+    }
 }

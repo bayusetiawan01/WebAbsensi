@@ -17,7 +17,7 @@
     <div class="row">
         <?php foreach ($matkul as $m) : ?>
             <div class="column">
-                <div class="card" style="height: 450px">
+                <div class="card" style="height: 470px;">
                     <table>
                         <tr><img src="<?= base_url() . $m['img_url'] ?>" style="margin: auto; margin-top: 10px; margin-bottom: 10px" height="200px" width="200px" alt="lesson logo"></tr>
                         <tr>

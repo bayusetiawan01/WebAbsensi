@@ -13,7 +13,9 @@
     <br>
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <a onclick="history.back(-1)" style="color: white" class="btn btn-primary mb-3 ml-5">Kembali</a>
-    <a href="" class="btn btn-primary mb-3 ml-5" data-toggle="modal" data-target="#eksport">Eksport</a>
+    
+    <a class="btn btn-primary mb-3 ml-5" href="<?php echo base_url('admin/siswahadir_pdf/') . $idper ?>">Eksport PDF</a>
+
     <div class="card">
         <div class="row">
             <table class="table table-hover table-responsive-lg">
@@ -23,7 +25,7 @@
                         <th scope="col">Nama</th>
                         <th scope="col">NPM</th>
                         <th scope="col">Kehadiran</th>
-                        <th scope="col">View Location</th>
+                        <th scope="col">Lokasi Praktikan</th>
                     </tr>
                 </thead>
                 <tbody>
