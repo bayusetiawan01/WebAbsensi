@@ -8,7 +8,7 @@
     <br><br>
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
-
+ 
     <?php
     $queryMatkul = " SELECT * FROM `user_matkul`";
     $matkul = $this->db->query($queryMatkul)->result_array();
@@ -17,9 +17,9 @@
     <div class="row">
         <?php foreach ($matkul as $m) : ?>
             <div class="column">
-                <div class="card" style="height: 470px;">
+                <div class="card" style="height: 500px;">
                     <table>
-                        <tr><img src="<?= base_url() . $m['img_url'] ?>" style="margin: auto; margin-top: 10px; margin-bottom: 10px" height="200px" width="200px" alt="lesson logo"></tr>
+                        <tr><img src="<?= base_url() . $m['img_url'] ?>" style="margin: auto; margin-top: 10px; margin-bottom: 10px" class="card-img" alt="lesson logo"></tr>
                         <tr>
                             <h4 style="height: 70px; padding:5px;"><?php echo $m['matkul']; ?></h4>
                         </tr>
@@ -32,6 +32,7 @@
                                         AND `user_kelas`.`is_active` = 1";
                         $kelas = $this->db->query($queryKelas)->result_array();
                         ?>
+                        <br>
                         <?php foreach ($kelas as $k) : ?>
                             <a class="btn btn-primary" style="margin: 2px" href="<?php echo base_url('admin/kelas/' . $k['id']); ?>">
                                 <span><?= $k['title']; ?></span>

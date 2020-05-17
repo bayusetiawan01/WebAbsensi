@@ -29,7 +29,7 @@
         ?>
         <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
         <div class="card mb-3 col">
-            <div class="row no-gutters">
+            <div class="row no-gutters"> 
                 <div class="col-md-3">
                     <img id='barcode' src=<?php echo "https://api.qrserver.com/v1/create-qr-code/?data=" . $random ?> alt="" title="QR Code" width="200" height="200" />
                     <br>
@@ -84,7 +84,7 @@
                             <th scope="col">Nama</th>
                             <th scope="col">NPM</th>
                             <th scope="col">Kehadiran</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <?php $i = 1; ?>
@@ -94,7 +94,7 @@
                             <td><?= $m['name']; ?></td>
                             <td><?= $m['npm']; ?></td>
                             <td>
-                                <a href="" class="badge badge-success">Detail</a>
+                                <a href="<?php echo site_url('admin/detailmhs/') . $m['npm'] ?>" class="badge badge-success">Detail</a>
                             </td>
                             <td>
                                 <a href="<?php echo site_url('admin/deletemhs/') . $m['id'] . '/' . $kelasid ?>" class="badge badge-danger">Delete</a>
@@ -116,7 +116,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="newPertemuanLabel">Add Pertemuan</h5>
+                    <h5 class="modal-title" id="newPertemuanLabel">Tambah Pertemuan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -134,8 +134,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
                 </form>
             </div>
@@ -146,7 +146,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="newPertemuanLabel">Add Mahasiswa</h5>
+                    <h5 class="modal-title" id="newPertemuanLabel">Tambah Mahasiswa</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -156,7 +156,7 @@
                         <tr>
                             <th scope="col">Nama</th>
                             <th scope="col">NPM</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>

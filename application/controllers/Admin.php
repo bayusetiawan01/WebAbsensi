@@ -91,17 +91,17 @@ class Admin extends CI_Controller
         $this->email->from('absensipraktikum.mtk@gmail.com', 'Absensi Praktikum Matematika Unpad');
         $this->email->to($kirim['email']);
         if ($type == 'activation') {
-            $this->email->subject('Account Activation Report');
-            $this->email->message('Congratulations your account has been activated by Admin!
-            Click this link to login : <a href="' . base_url() . '">Link</a>');
+            $this->email->subject('Laporan Aktivasi Akun');
+            $this->email->message('Selamat akun Anda telah diaktivasi oleh Admin! 
+                Klik link ini untuk login : <a href="' . base_url() . '">Link</a>');
         } elseif ($type == 'deactivation') {
-            $this->email->subject('Account Deactivation Report');
-            $this->email->message('Sorry, your account has been disabled by Admin! 
-                Please contact the Laboratory Assistant for more information');
+            $this->email->subject('Laporan Nonaktivasi Akun');
+            $this->email->message('Maaf, akun Anda telah dinonaktifkan oleh Admin!
+                Silakan hubungi Asisten Laboratorium untuk informasi lebih lanjut');
         } else {
-            $this->email->subject('Account Deletion Report');
-            $this->email->message('Sorry, your account has been deleted by Admin!
-                Please contact the Laboratory Assistant for more information');
+            $this->email->subject('Laporan Penghapusan Akun');
+            $this->email->message('Maaf, akun Anda telah dihapus oleh Admin!
+                Silakan hubungi Asisten Laboratorium untuk informasi lebih lanjut');
         }
 
 
@@ -421,5 +421,19 @@ class Admin extends CI_Controller
         $this->dompdf->load_html($html);
         $this->dompdf->render();
         $this->dompdf->stream("Kehadiran_Mahasiswa.pdf", array('Attachment'=>0));
+    }
+    public function detailmhs($idper)
+    {
+        $data['title'] = 'Detail Kehadiran Mahasiswa';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->model('Kelas_model', 'model1');
+        $data['mahasiswa'] = $this->model1->siswaHadir($idper);
+        $data['idper'] = $idper;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('daftarkelas/detailmhs', $data);
+        $this->load->view('templates/footer');
     }
 }

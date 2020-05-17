@@ -124,7 +124,7 @@ class Auth extends CI_Controller
             $this->_sendEmail($token, 'verify');
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Selamat, akun anda sudah dibuat! Tolong segera aktivasi akun anda!</div>');
+            Selamat, akun anda berhasil dibuat! Tolong cek email anda, untuk aktivasi akun!</div>');
             redirect('auth');
         }
     }
@@ -192,12 +192,12 @@ class Auth extends CI_Controller
                     $this->db->delete('user_token', ['email' => $email]);
 
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                    Aktifasi akun gagal! Token sudah kadaluwarsa. </div>');
+                    Aktivasi akun gagal! Token sudah kadaluwarsa. </div>');
                     redirect('auth');
                 }
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                Aktifasi akun gagal! Token salah. </div>');
+                Aktivasi akun gagal! Token salah. </div>');
                 redirect('auth');
             }
         } else {

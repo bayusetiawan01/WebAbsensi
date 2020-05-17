@@ -11,7 +11,7 @@
             <?= $this->session->flashdata('message'); ?>
         </small>
 
-        <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+        <div class="wrap-input100 validate-input" data-validate="Email valid : ex@abc.xyz">
             <input class="input100" type="text" name="email" placeholder="Email">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
@@ -20,7 +20,7 @@
             <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate="Password is required">
+        <div class="wrap-input100 validate-input" data-validate="Password harus diisi!">
             <input class="input100" type="password" name="pass" placeholder="Password">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
