@@ -4,13 +4,13 @@ Author: Wrappixel
 Email: niravjoshi87@gmail.com
 File: js
 */
-$(function() {
+$(function () {
     "use strict";
 
     // ============================================================== 
-    // sales ratio
+    // Grafik Kehadiran
     // ============================================================== 
-    var chart = new Chartist.Line('.sales', {
+    var chart = new Chartist.Line('.kehadiran', {
         labels: [1, 2, 3, 4, 5, 6, 7],
         series: [
             [24.5, 28.3, 42.7, 32, 34.9, 48.6, 40],
@@ -28,8 +28,8 @@ $(function() {
             onlyInteger: true,
             scaleMinSpace: 40,
             offset: 20,
-            labelInterpolationFnc: function(value) {
-                return (value / 10) + 'k';
+            labelInterpolationFnc: function (value) {
+                return (value);
             }
         },
 
@@ -40,7 +40,7 @@ $(function() {
     // ============================================================== 
     // Our Visitor
     // ============================================================== 
-    var sparklineLogin = function() {
+    var sparklineLogin = function () {
         $('#earnings').sparkline([6, 10, 9, 11, 9, 10, 12, 10, 9, 11, 9, 10, 12, 10, 9, 11, 9], {
             type: 'bar',
             height: '40',
@@ -53,7 +53,7 @@ $(function() {
     };
     var sparkResize;
 
-    $(window).resize(function(e) {
+    $(window).resize(function (e) {
         clearTimeout(sparkResize);
         sparkResize = setTimeout(sparklineLogin, 500);
     });

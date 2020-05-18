@@ -235,6 +235,18 @@ class Admin extends CI_Controller
                         'matkul' => $this->input->post('matkul'),
                         'img_url' => 'assets/images/kelas/' . $new_image
                     ];
+                    //Compress Image
+                    $config['image_library'] = 'gd2';
+                    $config['source_image'] = './assets/images/kelas/' . $new_image;
+                    $config['create_thumb'] = FALSE;
+                    $config['maintain_ratio'] = FALSE;
+                    $config['quality'] = '50%';
+                    $config['width'] = 200;
+                    $config['height'] = 200;
+                    $config['new_image'] = './assets/images/kelas/' . $new_image;
+                    $this->load->library('image_lib', $config);
+                    $this->image_lib->resize();
+
                     $this->db->insert('user_matkul', $data1);
                     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mata Kuliah Baru ditambahkan!</div>');
                     redirect('admin/matakuliah');
@@ -336,13 +348,23 @@ class Admin extends CI_Controller
         }
         redirect('admin/kelas/' . $this->input->post('kelas_id'));
     }
-    public function addmhs($pointer1, $pointer2)
+    public function addmhs($pointer2)
     {
-        $data = [
-            'kelas_id' => $pointer2,
-            'npm' => $pointer1
-        ];
-        $this->db->insert('user_access_kelas', $data);
+        $count = 0;
+        $member = $this->db->get('user')->result_array();
+
+        foreach ($member as $m) :
+            if ($this->input->post($m['npm']) == 1) {
+                $data = [
+                    'kelas_id' => $pointer2,
+                    'npm' => $m['npm']
+                ];
+                $this->db->insert('user_access_kelas', $data);
+                $count++;
+            }
+        endforeach;
+
+        if ($count != 0) $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Praktikan baru ditambahkan!</div>');
         redirect('admin/kelas/' . $pointer2);
     }
     public function siswahadir($idper)
@@ -375,7 +397,7 @@ class Admin extends CI_Controller
 
         $this->load->model('data_model');
         $data['mahasiswa'] = $this->data_model->data('user')->result();
-        $this->load->view('user/user_pdf',$data);
+        $this->load->view('user/user_pdf', $data);
 
         $paper_size = 'A4';
         $orientation = 'potrait';
@@ -384,7 +406,7 @@ class Admin extends CI_Controller
 
         $this->dompdf->load_html($html);
         $this->dompdf->render();
-        $this->dompdf->stream("Daftar_user.pdf", array('Attachment'=>0));
+        $this->dompdf->stream("Daftar_user.pdf", array('Attachment' => 0));
     }
     public function kelas_pdf()
     {
@@ -393,7 +415,7 @@ class Admin extends CI_Controller
 
         $this->load->model('data_model');
         $data['kelas'] = $this->data_model->data_kelas('user_kelas')->result();
-        $this->load->view('admin/kelas_pdf',$data);
+        $this->load->view('admin/kelas_pdf', $data);
 
         $paper_size = 'A4';
         $orientation = 'potrait';
@@ -402,7 +424,7 @@ class Admin extends CI_Controller
 
         $this->dompdf->load_html($html);
         $this->dompdf->render();
-        $this->dompdf->stream("Daftar_kelas.pdf", array('Attachment'=>0));
+        $this->dompdf->stream("Daftar_kelas.pdf", array('Attachment' => 0));
     }
     public function siswahadir_pdf($idper)
     {
@@ -411,7 +433,7 @@ class Admin extends CI_Controller
 
         $this->load->model('kelas_model');
         $data['hadir'] = $this->kelas_model->siswaHadir($idper);
-        $this->load->view('admin/siswahadir_pdf',$data);
+        $this->load->view('admin/siswahadir_pdf', $data);
 
         $paper_size = 'A4';
         $orientation = 'potrait';
@@ -420,7 +442,7 @@ class Admin extends CI_Controller
 
         $this->dompdf->load_html($html);
         $this->dompdf->render();
-        $this->dompdf->stream("Kehadiran_Mahasiswa.pdf", array('Attachment'=>0));
+        $this->dompdf->stream("Kehadiran_Mahasiswa.pdf", array('Attachment' => 0));
     }
     public function detailmhs($idper)
     {
@@ -435,5 +457,20 @@ class Admin extends CI_Controller
         $this->load->view('templates/sidebar', $data);
         $this->load->view('daftarkelas/detailmhs', $data);
         $this->load->view('templates/footer');
+    }
+    public function time()
+    {
+        date_default_timezone_set('Asia/Jakarta'); //Menyesuaikan waktu dengan tempat kita tinggal
+        echo date('H:i:s'); //Menampilkan Jam Sekarang
+    }
+    public function hadir($id)
+    {
+        $query = "SELECT `status_per` FROM `user_absen` WHERE `pertemuan_id` = $id";
+        $var = $this->db->query($query)->result_array();
+        $hadir = 0;
+        foreach ($var as $v) :
+            if ($v['status_per'] == 1) $hadir++;
+        endforeach;
+        echo $hadir;
     }
 }

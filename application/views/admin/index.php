@@ -7,8 +7,17 @@
     <!-- ============================================================== -->
     <br><br>
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+    <div class="row" style="text-align:center">
+        <div class="col-md-5 card" style="margin: auto; margin-bottom:50px; margin-left:10px; background:#e34c62; height:150px; text-align:center; border-radius:25px; float:right">
+            <p id="time" style="margin:auto; font-size: 6vw; color:white"></p>
+        </div>
+        <div class="col-md-3 card" style="margin: auto; margin-bottom:50px; margin-left:10px; background:#e34c62; height:150px; text-align:center; border-radius:25px; float:right">
+        </div>
+        <div class="col-md-3 card" style="margin: auto; margin-bottom:50px; margin-left:10px; background:#e34c62; height:150px; text-align:center; border-radius:25px; float:right">
+        </div>
+    </div>
 
- 
+
     <?php
     $queryMatkul = " SELECT * FROM `user_matkul`";
     $matkul = $this->db->query($queryMatkul)->result_array();
@@ -44,6 +53,22 @@
         <?php endforeach; ?>
     </div>
     <br><br><br><br><br><br><br><br><br><br><br><br>
+    <script>
+        // Function ini dijalankan ketika Halaman ini dibuka pada browser
+        $(function() {
+            setInterval(time, 1000); //fungsi yang dijalan setiap detik, 1000 = 1 detik
+        });
+
+        //Fungi ajax untuk Menampilkan Jam dengan mengakses File ajax_timestamp.php
+        function time() {
+            $.ajax({
+                url: '<?= base_url('admin/time/') ?>',
+                success: function(data) {
+                    $('#time').html(data);
+                },
+            });
+        }
+    </script>
     <!-- SUB MENU -->
 
 </div>

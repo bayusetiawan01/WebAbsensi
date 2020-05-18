@@ -17,7 +17,6 @@
 <!-- End Wrapper -->
 <!-- ============================================================== -->
 
-<script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/popper.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 <!-- Javascript untuk scroolbar -->
@@ -31,7 +30,6 @@
 <!--Untuk grafik-->
 <script src="<?php echo base_url('assets/js/chartist.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/chartist-plugin-tooltip.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/dashboard1.js'); ?>"></script>
 
 <script>
     $('.custom-file-input').on('change', function() {
