@@ -7,8 +7,29 @@
   <!-- ============================================================== -->
   <br><br>
   <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+    <!-- <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Export
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="<?php echo base_url('admin/pdf') ?>">PDF</a>
+      <a class="dropdown-item" href="<?php echo base_url('admin/user_excel') ?>">Excel</a>
+    </div>
+  </div> -->
 
-  <a class="btn btn-primary mb-3" href="<?php echo base_url('admin/pdf') ?>">Eksport PDF</a>
+  <div class="dropdown">
+    <button class="btn btn-primary mb-3 dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">
+      Dropdown
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelled-by="dropdownmenu">
+      <li><a href="#">PDF</a></li>
+      <li><a href="#">Excel</a></li>
+    </ul>
+  </div>
+
+  <a href="<?= base_url('admin/user_pdf'); ?>" class="btn btn-primary mb-3">Eksport PDF</a>
+  <a href="<?= base_url('admin/user_excel'); ?>" class="btn btn-primary mb-3">Eksport Excel</a>
 
   <div class="card">
     <div class="row">
@@ -76,45 +97,32 @@
 <!--  -->
 
 <!-- Modal -->
-<div class="modal fade" id="newSubMenuModal" tabindex="-1" role="dialog" aria-labelledby="newSubMenuModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="newMenuModalLabel">Tambah User</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="<?= base_url('menu/submenu'); ?>" method="post">
-        <div class="modal-body">
-          <div class="form-group">
-            <input type="text" class="form-control" id="title" name="title" placeholder="Nama">
-          </div>
-
-          <div class="form-group">
-            <input type="text" class="form-control" id="url" name="url" placeholder="NPM">
-          </div>
-
-          <div class="form-group">
-            <input type="text" class="form-control" id="icon" name="icon" placeholder="Submenu icon">
-          </div>
-
-          <div class="form-group">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" checked>
-              <label class="form-check-label" for="is_active">
-                Actif?
-              </label>
+<div class="modal fade" id="newKelasModal" tabindex="-1" role="dialog" aria-labelledby="newKelasModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newKelasLabel">Export</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-          </div>
+            <form action="<?= base_url('admin/pdf') ?>" method="post">
+                <div class="modal-body">
+                
+                    <div class="form-group">
+                        <select name="matkul_id" id="matkul_id" class="form-control">
+                            <option value="">Pilih Export</option>
+                            <option value="" href="">PDF</option>
+                            <option value="">Excel</option>
+                        </select>
+                    </div>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Oke</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-          <button type="submit" class="btn btn-primary">Tambah</button>
-        </div>
-      </form>
     </div>
-  </div>
-</div>
-<br><br><br><br><br><br><br><br><br><br><br><br>
+</div><br><br>

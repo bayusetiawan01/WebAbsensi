@@ -150,4 +150,9 @@ class User extends CI_Controller
         $this->load->model("kelas_model");
         $this->kelas_model->setHadir($pointer, $p2, $code, $longitude, $latitude, $res);
     }
+    public function time()
+    {
+        date_default_timezone_set('Asia/Jakarta'); //Menyesuaikan waktu dengan tempat kita tinggal
+        echo date('H:i:s'); //Menampilkan Jam Sekarang
+    }
 }

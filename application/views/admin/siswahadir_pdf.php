@@ -9,10 +9,10 @@
 <table>
 	<tr>
 		<th>No</th>
-		<th>Nama</th>
+		<th>Nama Mahasiswa</th>
 		<th>NPM</th>
 		<th>Kehadiran</th>
-		<th>	Lokasi Praktikan</th>
+		<th>	Lokasi Mahasiswa</th>
 	</tr>
 
 	<?php 
@@ -23,7 +23,11 @@
 		<td><?php echo $no++ ?></td>
 		<td><?php echo $h['name']; ?></td>
 		<td><?php echo $h['npm']; ?></td>
-		<td><?php echo $h['status_per']; ?></td>
+		<?php if ($h['status_per'] == 0) { ?>
+                                <td>Tidak Hadir</td>
+                            <?php } else { ?>
+                                <td>Hadir</td>
+                            <?php } ?>
 		<td><?php echo $h['latitude'] . "/" . $h['longitude']?></td>
 
 	</tr>

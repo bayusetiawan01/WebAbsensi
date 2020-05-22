@@ -6,15 +6,15 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <?php foreach ($mahasiswa as $m) :
-        $kelas_id = $m['kelas_id'];
+        $kelas_id = $m['kelas_id']; 
     endforeach;
     ?>
     <br>
     <br>
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-    <a onclick="history.back(-1)" style="color: white" class="btn btn-primary mb-3 ml-5">Kembali</a>
     
-    <a class="btn btn-primary mb-3 ml-5" href="<?php echo base_url('admin/siswahadir_pdf/') . $idper ?>">Eksport PDF</a>
+    <a class="btn btn-primary mb-3 " href="<?php echo base_url('admin/siswahadir_pdf/') . $idper ?>">Eksport PDF</a>
+    <a class="btn btn-primary mb-3 " href="<?php echo base_url('admin/siswahadir_excel/') . $idper ?>">Eksport Excel</a>
 
     <div class="card">
         <div class="row">
@@ -50,6 +50,8 @@
             </table>
         </div>
     </div>
+
+    <a onclick="history.back(-1)" style="color: white" class="btn btn-primary mb-3">Kembali</a>
 </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <!-- ============================================================== -->
 <!-- End Container fluid  -->

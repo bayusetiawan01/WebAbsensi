@@ -52,6 +52,11 @@
                  <!-- ============================================================== -->
                  <!-- Search -->
                  <!-- ============================================================== -->
+                 <!-- <li class="nav-item dropdown">
+                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <span id="time" class="mr-2 d-lg-inline text-gray-600 medium"></span>
+                 <span class="d-lg-inline text-gray-600 medium">,</span>
+                 <span class="mr-2 d-lg-inline text-gray-600 medium"><?php echo date('d-m-Y') ?></span> -->
                  <!-- <li class="nav-item search-box">
                             <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
                                 <div class="d-flex align-items-center">
@@ -66,8 +71,8 @@
                                 <a class="srh-btn">
                                     <i class="ti-close"></i>
                                 </a>
-                            </form>
-                        </li> -->
+                            </form> -->
+                        </li>
              </ul>
              <!-- ============================================================== -->
              <!-- Right side toggle and nav items -->
@@ -78,10 +83,11 @@
                  <!-- ============================================================== -->
                  <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        
                          <span class="mr-2 d-lg-inline text-gray-600 medium"><?= $user['name']; ?></span>
-                         <img src="<?= base_url('assets/images/profile/') . $user['image'] ?>" alt="usir" class="rounded-circle" width="31"></a>
+                         <img src="<?= base_url('assets/images/profile/') . $user['image'] ?>" alt="user" class="rounded-circle" width="31"></a>
                      <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                         <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                         <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> Profile Saya</a>
                          <div class="dropdown-divider"></div>
                          <a class="dropdown-item" href="<?= base_url('auth/logout'); ?>"><i class="ti-shift-right m-r-5 m-l-5"></i> Logout</a>
                      </div>
@@ -96,3 +102,21 @@
  <!-- ============================================================== -->
  <!-- End Topbar header -->
  <!-- ============================================================== -->
+
+ <!-- tambahaan -->
+ <script>
+        // Function ini dijalankan ketika Halaman ini dibuka pada browser
+        $(function() {
+            setInterval(time, 1000); //fungsi yang dijalan setiap detik, 1000 = 1 detik
+        });
+
+        //Fungi ajax untuk Menampilkan Jam dengan mengakses File ajax_timestamp.php
+        function time() {
+            $.ajax({
+                url: '<?= base_url('user/time/') ?>',
+                success: function(data) {
+                    $('#time').html(data);
+                },
+            });
+        }
+    </script>

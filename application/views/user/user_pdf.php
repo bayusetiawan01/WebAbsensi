@@ -14,7 +14,7 @@
 		<th>Email</th>
 		<th>Role</th>
 		<th>Aktif</th>
-		<th>Dibuat</th>
+		<th>Tanggal dibuat</th>
 	</tr>
 
 	<?php 

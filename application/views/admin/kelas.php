@@ -11,6 +11,7 @@
     <a href="<?= base_url(); ?>admin/matakuliah" class="btn btn-primary mb-3">Edit Mata Kuliah</a>
 
     <a href="<?= base_url(); ?>admin/kelas_pdf" class="btn btn-primary mb-3">Eksport PDF</a>
+    <a href="<?= base_url(); ?>admin/kelas_excel" class="btn btn-primary mb-3">Eksport Excel</a>
 
     <div class="card">
         <div class="row">

@@ -13,6 +13,6 @@ class Data_model extends CI_Model
   }
   public function siswa_hadir()
   {
-  	return $this->db->get('user')
+  	return $this->db->get('user');
   }
 }

@@ -7,15 +7,12 @@
     <!-- ============================================================== -->
     <br><br>
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-    <div class="row" style="text-align:center">
+    <!-- <div class="row" style="text-align:center">
         <div class="col-md-5 card" style="margin: auto; margin-bottom:50px; margin-left:10px; background:#e34c62; height:150px; text-align:center; border-radius:25px; float:right">
             <p id="time" style="margin:auto; font-size: 6vw; color:white"></p>
         </div>
-        <div class="col-md-3 card" style="margin: auto; margin-bottom:50px; margin-left:10px; background:#e34c62; height:150px; text-align:center; border-radius:25px; float:right">
-        </div>
-        <div class="col-md-3 card" style="margin: auto; margin-bottom:50px; margin-left:10px; background:#e34c62; height:150px; text-align:center; border-radius:25px; float:right">
-        </div>
     </div>
+      -->
 
 
     <?php
