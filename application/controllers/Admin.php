@@ -438,13 +438,13 @@ class Admin extends CI_Controller
         $this->pdf->filename = "Kehadiran_Mahasiswa.pdf";
         $this->pdf->load_view('admin/siswahadir_pdf', $data);
     }
-    public function detailmhs($idper)
+    public function detailmhs($npm)
     {
         $data['title'] = 'Detail Kehadiran Mahasiswa';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->model('Kelas_model', 'model1');
-        $data['mahasiswa'] = $this->model1->siswaHadir($idper);
-        $data['idper'] = $idper;
+        $data['mahasiswa'] = $this->model1->siswaHadir($npm);
+        $data['npm'] = $npm;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);

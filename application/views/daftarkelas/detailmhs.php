@@ -5,17 +5,18 @@
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
-    <?php foreach ($mahasiswa as $m) :
-        $kelas_id = $m['kelas_id'];
-    endforeach;
+    
+    <?php 
+        $query = "SELECT D.matkul, B.keterangan, A.status_per FROM user_absen AS A JOIN user_kelas_pertemuan AS B ON A.pertemuan_id = B.id JOIN user_kelas AS C ON B.kelas_id = C.id JOIN user_matkul AS D ON D.id = C.matkul_id WHERE A.npm = $npm";
+        $kehadiran = $this->db->query($query)->result_array();
     ?>
+
     <br>
     <br>
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-    <h2 class="h3 mb-4 text-gray-800">Nama Mahasiswa</h2>
-    <a onclick="history.back(-1)" style="color: white" class="btn btn-primary mb-3 ml-5">Kembali</a>
+    <h2 class="h3 mb-4 text-gray-800"><?= $npm ?></h2>
     
-    <a class="btn btn-primary mb-3 ml-5" href="<?php echo base_url('admin/siswahadir_pdf/') . $idper ?>">Eksport PDF</a>
+    <!-- <a class="btn btn-primary mb-3 ml-5" href="<?php echo base_url('admin/siswahadir_pdf/') . $idper ?>">Eksport PDF</a> -->
 
     <div class="card">
         <div class="row">
@@ -30,19 +31,16 @@
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    <?php foreach ($mahasiswa as $m) : ?>
+                    <?php foreach ($kehadiran as $q) : ?>
                         <tr>
                             <th scope="row"><?= $i; ?></th>
-                            <td><?= $m['name']; ?></td>
-                            <td><?= $m['npm']; ?></td>
-                            <?php if ($m['status_per'] == 0) { ?>
+                            <td><?= $q['matkul']; ?></td>
+                            <td><?= $q['keterangan']; ?></td>
+                            <?php if ($q['status_per'] == 0) { ?>
                                 <td>Tidak Hadir</td>
                             <?php } else { ?>
                                 <td>Hadir</td>
                             <?php } ?>
-                            <td>
-                                <a href="<?php echo site_url('admin/lokasi/') . $m['latitude'] . "/" . $m['longitude'] ?>" class="badge badge-success">Lihat Lokasi</a>
-                            </td>
                         </tr>
                         <?php $i++; ?>
                     <?php endforeach; ?>
@@ -50,37 +48,10 @@
             </table>
         </div>
     </div>
+
+    <a onclick="history.back(-1)" style="color: white" class="btn btn-primary mb-3">Kembali</a>
 </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
 <!-- ============================================================== -->
 <!--  -->
-<!-- Modal -->
-<div class="modal fade" id="eksport" tabindex="-1" role="dialog" aria-labelledby="eksportLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="eksport">Eksport Kehadiran Mahasiswa</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"></span>
-                </button>
-            </div>
-            <form action="" method="post">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <select name="matkul_id" id="matkul_id" class="form-control">
-                            <option value="">Pilih Eksport</option>
-                                <option value="">PDF</option>
-                                <option value="">Excel</option>
-                        </select>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Oke</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div><br><br>
