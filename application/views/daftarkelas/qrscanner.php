@@ -231,8 +231,6 @@
                 <!-- ============================================================== -->
                 <a onclick="history.back(-1)" style="color: white" class="btn btn-primary mb-3 ml-5">Kembali</a>
                 <button title="Play" class="btn btn-success mb-3" id="play" type="button" data-toggle="tooltip">Play</span></button>
-                <button title="Pause" class="btn btn-warning mb-3" id="pause" type="button" data-toggle="tooltip">Pause</span></button>
-                <button title="Stop streams" class="btn btn-danger mb-3" id="stop" type="button" data-toggle="tooltip">Stop</span></button>
                 <div>
                     <div class="" id="QR-Code">
                         <div class="panel-heading">
@@ -245,28 +243,17 @@
                         <div>
                             <div class="panel panel-info row">
                                 <div class="col-md-6" style="text-align:center">
-                                    <div class="card" style="position: relative;display: inline-block;">
+                                    <div style="position: relative;display: inline-block;">
                                         <canvas width="320" id="webcodecam-canvas"></canvas>
                                         <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
                                         <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
                                         <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
                                         <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
                                     </div>
-                                    <div class="card">
-                                        <br>
-                                        <label id=" zoom-value" width="100">Zoom: 2</label>
-                                        <input id="zoom" onchange="Page.changeZoom();" type="range" min="10" max="30" value="20">
-                                        <br>
-                                        <label id="brightness-value" width="100">Brightness: 0</label>
-                                        <input id="brightness" onchange="Page.changeBrightness();" type="range" min="0" max="128" value="0">
-                                        <br>
-                                        <label id="contrast-value" width="100">Contrast: 0</label>
-                                        <input id="contrast" onchange="Page.changeContrast();" type="range" min="0" max="64" value="0">
-                                    </div>
                                 </div>
                                 <div class="col-md-6" style="text-align: center">
                                     <div class="thumbnail" id="result">
-                                        <div class="card" style="overflow: hidden; text-align:center; margin:auto;">
+                                        <div style="overflow: hidden; text-align:center; margin:auto;">
                                             <img width="320" height="240" id="scanned-img" style="margin:auto;" src="">
                                         </div>
                                         <br>
@@ -374,7 +361,7 @@
                                 }
                                 return true;
                             }
-                            window.onload = play();
+                            //window.onload = play();
 
                             function play() {
                                 if (!localStream) {
@@ -847,12 +834,8 @@
                                 play = Q("#play"),
                                 scannedImg = Q("#scanned-img"),
                                 scannedQR = Q("#scanned-QR"),
-                                pause = Q("#pause"),
-                                stop = Q("#stop"),
                                 contrast = Q("#contrast"),
                                 contrastValue = Q("#contrast-value"),
-                                zoom = Q("#zoom"),
-                                zoomValue = Q("#zoom-value"),
                                 brightness = Q("#brightness"),
                                 brightnessValue = Q("#brightness-value"),
                                 flipVertical = Q("#flipVertical"),
@@ -988,6 +971,9 @@
                                 }
                             });
                         }).call(window.Page = window.Page || {});
+                    </script>
+                    <script>
+                        document.getElementById("play").click();
                     </script>
                     <!-- =====================================================================================-->
                     <br><br><br><br><br><br><br>
