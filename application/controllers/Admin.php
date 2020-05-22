@@ -312,6 +312,11 @@ class Admin extends CI_Controller
         $this->load->view('daftarkelas/kelas', $data);
         $this->load->view('templates/footer');
     }
+    public function setujuizin($absenid, $kelasid)
+    {
+        $this->load->model("kelas_model");
+        $this->kelas_model->setujuiIzin($absenid, $kelasid);
+    }
     public function addpertemuan()
     {
         $this->load->model('Kelas_model', 'model1');
@@ -346,6 +351,7 @@ class Admin extends CI_Controller
                     'status_per' => 0,
                     'latitude' => 0,
                     'longitude' => 0,
+                    'foto' => NULL,
                 ];
                 $this->db->insert('user_absen', $data3);
             endforeach;

@@ -27,7 +27,7 @@
 <![endif]-->
 </head>
 
-<body>
+<body style="background: #fecc">
 
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->

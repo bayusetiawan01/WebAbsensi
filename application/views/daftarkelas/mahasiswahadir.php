@@ -6,13 +6,13 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <?php foreach ($mahasiswa as $m) :
-        $kelas_id = $m['kelas_id']; 
+        $kelas_id = $m['kelas_id'];
     endforeach;
     ?>
     <br>
     <br>
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-    
+
     <a class="btn btn-primary mb-3 " href="<?php echo base_url('admin/siswahadir_pdf/') . $idper ?>">Eksport PDF</a>
     <a class="btn btn-primary mb-3 " href="<?php echo base_url('admin/siswahadir_excel/') . $idper ?>">Eksport Excel</a>
 
@@ -25,7 +25,7 @@
                         <th scope="col">Nama</th>
                         <th scope="col">NPM</th>
                         <th scope="col">Kehadiran</th>
-                        <th scope="col">Lokasi Praktikan</th>
+                        <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,11 +37,20 @@
                             <td><?= $m['npm']; ?></td>
                             <?php if ($m['status_per'] == 0) { ?>
                                 <td>Tidak Hadir</td>
+                            <?php } elseif ($m['status_per'] == 2) { ?>
+                                <td>Perlu Izin</td>
+                            <?php } elseif ($m['status_per'] == 3) { ?>
+                                <td>Izin</td>
                             <?php } else { ?>
                                 <td>Hadir</td>
                             <?php } ?>
                             <td>
-                                <a href="<?php echo site_url('admin/lokasi/') . $m['latitude'] . "/" . $m['longitude'] ?>" class="badge badge-success">Lihat Lokasi</a>
+                                <?php if ($m['status_per'] == 1) { ?>
+                                    <a href="<?php echo site_url('admin/lokasi/') . $m['latitude'] . "/" . $m['longitude'] ?>" class="badge badge-success">Lihat Lokasi</a>
+                                <?php } elseif ($m['status_per'] == 2) { ?>
+                                    <a href="<?php echo site_url('assets/images/surat/' . $m['foto']) ?>" target="_blank" class="badge badge-warning">Lihat Surat</a>
+                                    <a href="<?php echo site_url('admin/setujuizin/' . $m['absen_id']) . '/' . $idper ?>" class="badge badge-success">Setujui</a>
+                                <?php } ?>
                             </td>
                         </tr>
                         <?php $i++; ?>
@@ -72,8 +81,8 @@
                     <div class="form-group">
                         <select name="matkul_id" id="matkul_id" class="form-control">
                             <option value="">Pilih Eksport</option>
-                                <option value="">PDF</option>
-                                <option value="">Excel</option>
+                            <option value="">PDF</option>
+                            <option value="">Excel</option>
                         </select>
                     </div>
 

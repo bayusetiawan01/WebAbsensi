@@ -58,7 +58,7 @@
                             <br>
                             <?php if ($vard == 1) { ?>
                                 <button style="margin: 10px" type="button" class="btn btn-success">Anda Sudah Menghadiri Kelas</button>
-                            <?php } else if ($varf <= 120) { ?>
+                            <?php } else if ($varf <= 120 && $vard == 0) { ?>
                                 <script>
                                     function getAbsen() {
                                         navigator.geolocation.getCurrentPosition(redirectToPosition);
@@ -69,15 +69,21 @@
                                     }
                                 </script>
                                 <a style="margin: 10px; color:white;" onclick="getAbsen()" class="btn btn-success">Hadiri Kelas</a>
+                                <a href="<?php echo base_url('user/izin/') . $vare ?>" style="margin: 10px" type="button" class="btn btn-dark">Izin Tidak Menghadiri Kelas</a>
                             <?php } else if ($varc == 0) { ?>
                                 <button style="margin: 10px" type="button" class="btn btn-dark">Kelas Belum Tersedia</button>
+                            <?php } elseif ($vard == 3) { ?>
+                                <button style="margin: 10px" type="button" class="btn btn-success">Berhasil Izin</button>
+                            <?php } elseif ($vard == 2) { ?>
+                                <button style="margin: 10px" type="button" class="btn btn-warning">Tunggu Izin Diverifikasi</button>
                             <?php } else { ?>
                                 <button style="margin: 10px; color:white;" type="button" class="btn btn-secondary">Terlambat Menghadiri Kelas</button>
+                                <a href="<?php echo base_url('user/izin/') . $vare ?>" style="margin: 10px" type="button" class="btn btn-dark">Izin Tidak Menghadiri Kelas</a>
                             <?php } ?>
                         </div>
                     </div>
                     <div class="col-md-5">
-                        <table class="table table-hover" style="max-height: 250px; overflow: auto; display:inline-block;">
+                        <table class="table table-hover" style="max-height: 250px; overflow: auto; display:inline-block">
                             <thead>
                                 <tr>
                                     <th scope="col">Pertemuan</th>
@@ -94,6 +100,10 @@
                                                 <td><?= $k['tanggal']; ?></td>
                                                 <?php if ($k['status_per'] == 0) { ?>
                                                     <td>Tidak Hadir</td>
+                                                <?php } elseif ($k['status_per'] == 2) { ?>
+                                                    <td>Menunggu Persetujuan</td>
+                                                <?php } elseif ($k['status_per'] == 3) { ?>
+                                                    <td>Izin</td>
                                                 <?php } else { ?>
                                                     <td>Hadir</td>
                                                 <?php } ?>

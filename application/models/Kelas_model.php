@@ -72,6 +72,23 @@ class Kelas_model extends CI_Model
             redirect('user/');
         }
     }
+    public function setIzin($pbantu, $foto)
+    {
+        $this->db->set("status_per", 2);
+        $this->db->set("foto", $foto);
+        $this->db->where("absen_id", $pbantu);
+        $this->db->update($this->_table4);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Mohon tunggu Asisten Laboratorium memverifikasi surat izin!</div>');
+        redirect('user/');
+    }
+    public function setujuiIzin($pbantu, $idper)
+    {
+        $this->db->set("status_per", 3);
+        $this->db->where("absen_id", $pbantu);
+        $this->db->update($this->_table4);
+        redirect('admin/siswahadir/' . $idper);
+    }
     public function siswaHadir($p)
     {
         $query = "SELECT `user_absen`.*, `user`.`name`, `user_kelas_pertemuan`.`kelas_id`

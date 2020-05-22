@@ -150,6 +150,37 @@ class User extends CI_Controller
         $this->load->model("kelas_model");
         $this->kelas_model->setHadir($pointer, $p2, $code, $longitude, $latitude, $res);
     }
+    public function izin($pointer)
+    {
+        $data['title'] = 'Upload Lampiran';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pointer'] = $pointer;
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('user/izin', $data);
+        $this->load->view('templates/footer');
+    }
+    public function setizin($pointer)
+    {
+        $upload_image = $_FILES['image']['name'];
+        if ($upload_image) {
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = '2048';
+            $config['upload_path'] = './assets/images/surat';
+            $this->load->library('upload', $config);
+            if ($this->upload->do_upload('image')) {
+                $foto = $this->upload->data('file_name');
+                $this->load->model("kelas_model");
+                $this->kelas_model->setIzin($pointer, $foto);
+            } else {
+                echo $this->upload->display_errors();
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Kirim Surat Terlebih Dahulu!</div>');
+            redirect('user/');
+        }
+    }
     public function time()
     {
         date_default_timezone_set('Asia/Jakarta'); //Menyesuaikan waktu dengan tempat kita tinggal
