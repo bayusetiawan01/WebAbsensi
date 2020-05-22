@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+//load library
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 class Admin extends CI_Controller
 {
     public function __construct()
@@ -391,8 +395,8 @@ class Admin extends CI_Controller
     }
 
     public function user_pdf()
-    { 
-        $this->load->library('dompdf_gen');
+    {
+        $this->load->library('pdf');
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->load->model('data_model');
@@ -401,16 +405,13 @@ class Admin extends CI_Controller
 
         $paper_size = 'A4';
         $orientation = 'potrait';
-        $html = $this->output->get_output();
-        $this->dompdf->set_paper($paper_size, $orientation);
-
-        $this->dompdf->load_html($html);
-        $this->dompdf->render();
-        $this->dompdf->stream("Daftar_user.pdf", array('Attachment' => 0));
+        $this->pdf->setPaper($paper_size, $orientation);
+        $this->pdf->filename = "LaporanUser.pdf";
+        $this->pdf->load_view('user/user_pdf', $data);
     }
     public function kelas_pdf()
     {
-        $this->load->library('dompdf_gen');
+        $this->load->library('pdf');
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->load->model('data_model');
@@ -419,16 +420,12 @@ class Admin extends CI_Controller
 
         $paper_size = 'A4';
         $orientation = 'potrait';
-        $html = $this->output->get_output();
-        $this->dompdf->set_paper($paper_size, $orientation);
-
-        $this->dompdf->load_html($html);
-        $this->dompdf->render();
-        $this->dompdf->stream("Daftar_kelas.pdf", array('Attachment' => 0));
+        $this->pdf->setPaper($paper_size, $orientation);
+        $this->pdf->load_view('admin/kelas_pdf', $data);
     }
     public function siswahadir_pdf($idper)
     {
-        $this->load->library('dompdf_gen');
+        $this->load->library('pdf');
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->load->model('kelas_model');
@@ -437,12 +434,9 @@ class Admin extends CI_Controller
 
         $paper_size = 'A4';
         $orientation = 'potrait';
-        $html = $this->output->get_output();
-        $this->dompdf->set_paper($paper_size, $orientation);
-
-        $this->dompdf->load_html($html);
-        $this->dompdf->render();
-        $this->dompdf->stream("Kehadiran_Mahasiswa.pdf", array('Attachment' => 0));
+        $this->pdf->setPaper($paper_size, $orientation);
+        $this->pdf->filename = "Kehadiran_Mahasiswa.pdf";
+        $this->pdf->load_view('admin/siswahadir_pdf', $data);
     }
     public function detailmhs($idper)
     {
@@ -479,53 +473,44 @@ class Admin extends CI_Controller
         $this->load->model('data_model');
         $data['mahasiswa'] = $this->data_model->data('user')->result();
 
-        require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
-        require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
-
-        $object = new PHPExcel();
+        $object = new Spreadsheet();
 
         $object->getProperties()->setCreator("Calon Asisten Laboratorium");
         $object->getProperties()->setLastModifiedBy("Calon Asisten Laboratorium");
         $object->getProperties()->setTitle("Manajemen User");
         $object->setActiveSheetIndex(0);
 
-        $object->getActiveSheet()->setCellValue('A1','No');
-        $object->getActiveSheet()->setCellValue('B1','Name User');
-        $object->getActiveSheet()->setCellValue('C1','NPM');
-        $object->getActiveSheet()->setCellValue('D1','Email');
-        $object->getActiveSheet()->setCellValue('E1','Role');
-        $object->getActiveSheet()->setCellValue('F1','Aktif');
-        $object->getActiveSheet()->setCellValue('G1','Tanggal dibuat');
+        $object->getActiveSheet()->setCellValue('A1', 'No');
+        $object->getActiveSheet()->setCellValue('B1', 'Name User');
+        $object->getActiveSheet()->setCellValue('C1', 'NPM');
+        $object->getActiveSheet()->setCellValue('D1', 'Email');
+        $object->getActiveSheet()->setCellValue('E1', 'Role');
+        $object->getActiveSheet()->setCellValue('F1', 'Aktif');
+        $object->getActiveSheet()->setCellValue('G1', 'Tanggal dibuat');
 
         $baris = 2;
         $no = 1;
 
-
-        foreach($data['mahasiswa'] as $m)
-        {
-            $object->getActiveSheet()->setCellValue('A'.$baris, $no++);
-            $object->getActiveSheet()->setCellValue('B'.$baris, $m->name);
-            $object->getActiveSheet()->setCellValue('C'.$baris, $m->npm);
-            $object->getActiveSheet()->setCellValue('D'.$baris, $m->email);
-            $object->getActiveSheet()->setCellValue('E'.$baris, $m->role_id);
-            $object->getActiveSheet()->setCellValue('F'.$baris, $m->is_active);
-            $object->getActiveSheet()->setCellValue('G'.$baris, $m->date_created);
-
-            $baris++; 
+        foreach ($data['mahasiswa'] as $m) {
+            $object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+            $object->getActiveSheet()->setCellValue('B' . $baris, $m->name);
+            $object->getActiveSheet()->setCellValue('C' . $baris, $m->npm);
+            $object->getActiveSheet()->setCellValue('D' . $baris, $m->email);
+            $object->getActiveSheet()->setCellValue('E' . $baris, $m->role_id);
+            $object->getActiveSheet()->setCellValue('F' . $baris, $m->is_active);
+            $object->getActiveSheet()->setCellValue('G' . $baris, $m->date_created);
+            $baris++;
         }
 
-            $filename = "Data_User".'.xlsx';
+        $object->getActiveSheet()->setTitle("Data User");
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="Report Excel.xlsx"');
+        header('Chache-Control: max-age=0');
 
-            $object->getActiveSheet()->setTitle("Data User");
-            header('Content-Type: application/vnd.openxmlformats-officedocument.scpreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="'.$filename.'"');
-            header('Chache-Control: max-age=0');
-
-            $writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
-            $writer->save('php://output');
-            exit;
-
-        }
+        $writer = IOFactory::createWriter($object, 'Xlsx');
+        $writer->save('php://output');
+        exit;
+    }
 
     public function siswahadir_excel($idper)
     {
@@ -533,49 +518,44 @@ class Admin extends CI_Controller
         $this->load->model('kelas_model');
         $data['hadir'] = $this->kelas_model->siswaHadir($idper);
 
-        require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
-        require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
-
-        $object = new PHPExcel();
+        $object = new Spreadsheet();
 
         $object->getProperties()->setCreator("Calon Asisten Laboratorium");
         $object->getProperties()->setLastModifiedBy("Calon Asisten Laboratorium");
         $object->getProperties()->setTitle("Manajemen User");
         $object->setActiveSheetIndex(0);
 
-        $object->getActiveSheet()->setCellValue('A1','No');
-        $object->getActiveSheet()->setCellValue('B1','Nama Mahasiswa');
-        $object->getActiveSheet()->setCellValue('C1','NPM');
-        $object->getActiveSheet()->setCellValue('D1','Kehadiran');
-        $object->getActiveSheet()->setCellValue('E1','Lokasi Mahasiswa');
+        $object->getActiveSheet()->setCellValue('A1', 'No');
+        $object->getActiveSheet()->setCellValue('B1', 'Nama Mahasiswa');
+        $object->getActiveSheet()->setCellValue('C1', 'NPM');
+        $object->getActiveSheet()->setCellValue('D1', 'Kehadiran');
+        $object->getActiveSheet()->setCellValue('E1', 'Lokasi Mahasiswa');
 
         $baris = 2;
         $no = 1;
 
 
-        foreach($data['hadir'] as $h)
-        {
-            $object->getActiveSheet()->setCellValue('A'.$baris, $no++);
-            $object->getActiveSheet()->setCellValue('B'.$baris, $h['name']);
-            $object->getActiveSheet()->setCellValue('C'.$baris, $h['npm']);
-            $object->getActiveSheet()->setCellValue('D'.$baris, $h['status_per']);
-            $object->getActiveSheet()->setCellValue('E'.$baris, $h['latitude'] . "/" . $h['longitude']);
+        foreach ($data['hadir'] as $h) {
+            $object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+            $object->getActiveSheet()->setCellValue('B' . $baris, $h['name']);
+            $object->getActiveSheet()->setCellValue('C' . $baris, $h['npm']);
+            $object->getActiveSheet()->setCellValue('D' . $baris, $h['status_per']);
+            $object->getActiveSheet()->setCellValue('E' . $baris, $h['latitude'] . "/" . $h['longitude']);
 
-            $baris++; 
+            $baris++;
         }
 
-            $filename = "Data_Kehadiran".'.xlsx';
+        $filename = "Data_Kehadiran" . '.xlsx';
 
-            $object->getActiveSheet()->setTitle("Data Kehadiran");
-            header('Content-Type: application/vnd.openxmlformats-officedocument.scpreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="'.$filename.'"');
-            header('Chache-Control: max-age=0');
+        $object->getActiveSheet()->setTitle("Data Kehadiran");
+        header('Content-Type: application/vnd.openxmlformats-officedocument.scpreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Chache-Control: max-age=0');
 
-            $writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
-            $writer->save('php://output');
-            exit;
-
-        }
+        $writer = IOFactory::createwriter($object, 'Xlsx');
+        $writer->save('php://output');
+        exit;
+    }
 
     public function kelas_excel()
     {
@@ -583,47 +563,42 @@ class Admin extends CI_Controller
         $this->load->model('data_model');
         $data['kelas'] = $this->data_model->data_kelas('user_kelas')->result();
 
-        require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
-        require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
-
-        $object = new PHPExcel();
+        $object = new Spreadsheet();
 
         $object->getProperties()->setCreator("Calon Asisten Laboratorium");
         $object->getProperties()->setLastModifiedBy("Calon Asisten Laboratorium");
         $object->getProperties()->setTitle("Manajemen User");
         $object->setActiveSheetIndex(0);
 
-        $object->getActiveSheet()->setCellValue('A1','No');
-        $object->getActiveSheet()->setCellValue('B1','Judul');
-        $object->getActiveSheet()->setCellValue('C1','Mata Kuliah');
-        $object->getActiveSheet()->setCellValue('D1','Aktif');
+        $object->getActiveSheet()->setCellValue('A1', 'No');
+        $object->getActiveSheet()->setCellValue('B1', 'Judul');
+        $object->getActiveSheet()->setCellValue('C1', 'Mata Kuliah');
+        $object->getActiveSheet()->setCellValue('D1', 'Aktif');
 
         $baris = 2;
         $no = 1;
 
 
 
-        foreach($data['kelas'] as $k)
-        {
+        foreach ($data['kelas'] as $k) {
 
-            $object->getActiveSheet()->setCellValue('A'.$baris, $no++);
-            $object->getActiveSheet()->setCellValue('B'.$baris, $k->title);
-            $object->getActiveSheet()->setCellValue('C'.$baris, $k->matkul_id);
-            $object->getActiveSheet()->setCellValue('D'.$baris, $k->is_active);
+            $object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+            $object->getActiveSheet()->setCellValue('B' . $baris, $k->title);
+            $object->getActiveSheet()->setCellValue('C' . $baris, $k->matkul_id);
+            $object->getActiveSheet()->setCellValue('D' . $baris, $k->is_active);
 
-            $baris++; 
+            $baris++;
         }
 
-            $filename = "Data_Kelas".'.xlsx';
+        $filename = "Data_Kelas" . '.xlsx';
 
-            $object->getActiveSheet()->setTitle("Data Kelas");
-            header('Content-Type: application/vnd.openxmlformats-officedocument.scpreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="'.$filename.'"');
-            header('Chache-Control: max-age=0');
+        $object->getActiveSheet()->setTitle("Data Kelas");
+        header('Content-Type: application/vnd.openxmlformats-officedocument.scpreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Chache-Control: max-age=0');
 
-            $writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
-            $writer->save('php://output');
-            exit;
-
-        }
+        $writer = IOFactory::createwriter($object, 'Xlsx');
+        $writer->save('php://output');
+        exit;
+    }
 }
