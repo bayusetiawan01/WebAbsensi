@@ -105,6 +105,12 @@ class Kelas_model extends CI_Model
 
         return $this->db->query($query)->result_array();
     }
+    public function member()
+    {
+        $query = "SELECT * FROM `user` ORDER BY `npm` ASC";
+
+        return $this->db->query($query)->result_array();
+    }
     public function data_user()
     {
         return $this->db->get('user');

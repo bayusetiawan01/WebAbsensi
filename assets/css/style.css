@@ -6552,7 +6552,7 @@ a.text-warning:hover, a.text-warning:focus {
   color: #ffab01 !important; }
 
 .text-danger {
-  color: #fa5838 !important; }
+  color: #e34c62 !important; }
 
 a.text-danger:hover, a.text-danger:focus {
   color: #f92e06 !important; }
@@ -6591,7 +6591,7 @@ a.text-purple:hover, a.text-purple:focus {
   color: #6a7a8c !important; }
 
 .text-muted {
-  color: #000 !important; }
+  color: grey !important; }
 
 .text-black-50 {
   color: rgba(0, 0, 0, 0.5) !important; }
@@ -7422,7 +7422,7 @@ Notify
   z-index: 50;
   transition: 0.2s ease-in;
   box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.05);
-  background: #ffd3b6;
+  background: blanchedalmond;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   height: 64px; }
   .topbar .navbar-collapse {
@@ -10288,15 +10288,15 @@ body .jqstooltip {
     border-bottom: 2px solid #2962FF; }
 
 .error .form-control {
-  border-color: #fa5838; }
+  border-color: #e34c62; }
 
 .error .help-block {
-  color: #fa5838; }
+  color: #e34c62; }
 
 .error-box {
   height: 100%;
   position: fixed;
-  background: url(../../../../assets/images/background/error-bg.jpg) no-repeat center center #fff;
+  background: url(../../../../assets/images/background/error-bg.jpg) no-repeat center center #2b3639;
   width: 100%; }
   .error-box .error-body {
     padding-top: 5%; }
@@ -10461,6 +10461,9 @@ File: scss
   .do-block {
     display: block !important; } 
   .logo-text{
+    display: none !important;
+  }
+  .waktu{
     display: none !important;
   }
   }

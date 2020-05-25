@@ -30,9 +30,9 @@
         <div class="error-box">
             <div class="error-body text-center">
                 <h1 class="error-title text-danger">404</h1>
-                <h3 class="text-uppercase error-subtitle">PAGE NOT FOUND !</h3>
-                <p class="text-muted m-t-30 m-b-30">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>
-                <a href="<?php echo base_url('user'); ?>" class="btn btn-danger btn-rounded waves-effect waves-light m-b-40">Back to home</a>
+                <h3 class="text-uppercase error-subtitle">HALAMAN TIDAK DITEMUKAN !</h3>
+                <p class="text-muted m-t-30 m-b-30">TAMPAKNYA ANDA TERSESAT</p>
+                <a href="<?php echo base_url('user'); ?>" style="background-color:#e34c62 !important" class="btn btn-danger btn-rounded waves-effect waves-light m-b-40">Kembali ke home</a>
             </div>
         </div>
     </div>

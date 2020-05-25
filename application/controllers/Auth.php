@@ -146,15 +146,23 @@ class Auth extends CI_Controller
         $this->email->to($this->input->post('email'));
 
         if ($type == 'verify') {
+            $data = array(
+                'email' => $this->input->post('email'),
+                'token' => urlencode($token),
+                'text' => "auth/verify?email=",
+                'text2' => "Aktivasi",
+            );
             $this->email->subject('Verifikasi Akun');
-            $this->email->message('Klik link ini untuk verifikasi akun anda :
-            <a href="' . base_url() . 'auth/verify?email=' . $this->input->post('email') .
-                '&token=' . urlencode($token) . '">Aktifkan</a>');
+            $this->email->message($this->load->view('templates/email_template', $data, true));
         } elseif ($type == 'forgot') {
+            $data = array(
+                'email' => $this->input->post('email'),
+                'token' => urlencode($token),
+                'text' => "auth/resetpassword?email=",
+                'text2' => "Reset Password",
+            );
             $this->email->subject('Reset Password');
-            $this->email->message('Klik link ini untuk mereset password anda :
-            <a href="' . base_url() . 'auth/resetpassword?email=' . $this->input->post('email') .
-                '&token=' . urlencode($token) . '">Reset Password</a>');
+            $this->email->message($this->load->view('templates/email_template', $data, true));
         }
         if ($this->email->send()) {
             return true;

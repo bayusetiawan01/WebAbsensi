@@ -9,6 +9,7 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <div class="row">
         <div class="card mb-3 col-lg">
+            <h1 class="h4 mb-4 text-gray-800">Pilih file berupa dokumen word, pdf atau gambar</h1>
             <div>
                 <?php echo form_open_multipart('user/setizin/' . $pointer); ?>
                 <div class="col-lg">

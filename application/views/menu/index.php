@@ -9,41 +9,39 @@
   <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
   <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Tambah Menu Baru</a>
-  <div class="card">
-    <div class="row">
-      <div class="col-lg-6">
-        <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+  <div class="row">
+    <div class="col-lg-6 card">
+      <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
 
-        <?= $this->session->flashdata('message'); ?>
+      <?= $this->session->flashdata('message'); ?>
 
-        <table class="table table-hover">
+      <table class="table table-hover">
 
 
-          <thead>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Menu</th>
+            <th scope="col">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php $i = 1; ?>
+          <?php foreach ($menu as $m) : ?>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Menu</th>
-              <th scope="col">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php $i = 1; ?>
-            <?php foreach ($menu as $m) : ?>
-              <tr>
-                <th scope="row"><?= $i; ?></th>
-                <td><?= $m['menu']; ?></td>
-                <td>
+              <th scope="row"><?= $i; ?></th>
+              <td><?= $m['menu']; ?></td>
+              <td>
                 <a href="<?= base_url(); ?>menu/hapusmenu/<?= $m['menu']; ?>" class="badge badge-danger" onclick="return confirm('sure?');">delete</a>
-                </td>
-              </tr>
-              <?php $i++; ?>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
+              </td>
+            </tr>
+            <?php $i++; ?>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
 
 
 
-      </div>
     </div>
   </div>
 </div>

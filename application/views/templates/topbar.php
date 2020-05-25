@@ -12,7 +12,7 @@
              <!-- Logo -->
              <!-- ============================================================== -->
              <div class="navbar-brand">
-                 <a href="<?php echo base_url('admin/overview/'); ?>" class="logo">
+                 <a href="<?php echo base_url('user/'); ?>" class="logo">
                      <!-- Logo icon -->
                      <b class="logo-icon">
                          <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -72,7 +72,7 @@
                                     <i class="ti-close"></i>
                                 </a>
                             </form> -->
-                        </li>
+                 </li>
              </ul>
              <!-- ============================================================== -->
              <!-- Right side toggle and nav items -->
@@ -82,15 +82,10 @@
                  <!-- User profile and search -->
                  <!-- ============================================================== -->
                  <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        
+                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="<?= base_url('user/profile'); ?>" aria-haspopup="true" aria-expanded="false">
+
                          <span class="mr-2 d-lg-inline text-gray-600 medium"><?= $user['name']; ?></span>
                          <img src="<?= base_url('assets/images/profile/') . $user['image'] ?>" alt="user" class="rounded-circle" width="31"></a>
-                     <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                         <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> Profile Saya</a>
-                         <div class="dropdown-divider"></div>
-                         <a class="dropdown-item" href="<?= base_url('auth/logout'); ?>"><i class="ti-shift-right m-r-5 m-l-5"></i> Logout</a>
-                     </div>
                  </li>
                  <!-- ============================================================== -->
                  <!-- User profile and search -->
@@ -105,18 +100,18 @@
 
  <!-- tambahaan -->
  <script>
-        // Function ini dijalankan ketika Halaman ini dibuka pada browser
-        $(function() {
-            setInterval(time, 1000); //fungsi yang dijalan setiap detik, 1000 = 1 detik
-        });
+     // Function ini dijalankan ketika Halaman ini dibuka pada browser
+     $(function() {
+         setInterval(time, 1000); //fungsi yang dijalan setiap detik, 1000 = 1 detik
+     });
 
-        //Fungi ajax untuk Menampilkan Jam dengan mengakses File ajax_timestamp.php
-        function time() {
-            $.ajax({
-                url: '<?= base_url('user/time/') ?>',
-                success: function(data) {
-                    $('#time').html(data);
-                },
-            });
-        }
-    </script>
+     //Fungi ajax untuk Menampilkan Jam dengan mengakses File ajax_timestamp.php
+     function time() {
+         $.ajax({
+             url: '<?= base_url('user/time/') ?>',
+             success: function(data) {
+                 $('#time').html(data);
+             },
+         });
+     }
+ </script>

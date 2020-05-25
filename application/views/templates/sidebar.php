@@ -7,13 +7,14 @@
 
                 <hr class="sidebar-divider">
                 <!-- Query Menu -->
-                <div class="sidebar-heading" style="text-align:center;color:aliceblue; padding:10px;border-bottom: 3px solid #e34c62;">
-                        <p id="time" style="margin:auto; font-size: 3vw; color:white"></p>
-                        <span id="time" class="mr-2 d-lg-inline text-gray-600 medium"></span>
-                        <br>
-                        <span class="mr-2 d-lg-inline text-gray-600 medium"><?php echo date('d-m-Y') ?></span>
+                <div class="waktu" style="text-align:center;color:aliceblue; padding:10px">
+                    <p id="time" style="margin:auto; font-size: 2.5em; color:white;"></p>
+                    <span id="time" class="mr-2 d-lg-inline text-gray-600 medium"></span>
+                    <br>
+                    <span class="mr-2 d-lg-inline text-gray-600 medium"><?php echo date('d-m-Y') ?></span>
                 </div>
-                
+                <hr class="sidebar-divider mt-3">
+
 
                 <?php
                 $role_id = $this->session->userdata('role_id');
@@ -26,7 +27,7 @@
                 ?>
                 <!-- Looping Menu-->
                 <?php foreach ($menu as $m) : ?>
-                    <div class="sidebar-heading" style="text-align:center;color:aliceblue; padding:10px;border-bottom: 3px solid #e34c62;">
+                    <div href="" class="sidebar-heading" style="text-align:center;color:aliceblue; padding:10px;border-bottom: 3px solid #e34c62;">
                         <strong><?php echo $m['menu']; ?></strong>
                     </div>
                     <!-- SUB MENU -->

@@ -294,7 +294,6 @@ class Admin extends CI_Controller
     public function kelas($pointer2)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['member'] = $this->db->get('user')->result_array();
         $data['akses'] = $this->db->get('user_access_kelas')->result_array();
         $data['pertemuan'] = $this->db->get_where('user_kelas_pertemuan', ['kelas_id' => $pointer2])->result_array();
         $this->load->model('Kelas_model', 'model1');
@@ -305,6 +304,7 @@ class Admin extends CI_Controller
         $data['kelas'] = $kelas;
         $data['matkul'] = $matkul;
         $data['kelasid'] = $pointer2;
+        $data['member'] = $this->model1->member();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);

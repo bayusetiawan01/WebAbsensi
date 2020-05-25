@@ -30,9 +30,9 @@
         <div class="error-box">
             <div class="error-body text-center">
                 <h1 class="error-title text-danger">403</h1>
-                <h3 class="text-uppercase error-subtitle">ACCESS FORBIDEN !</h3>
-                <p class="text-muted m-t-30 m-b-30">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>
-                <a href="<?php echo base_url('user'); ?>" class="btn btn-danger btn-rounded waves-effect waves-light m-b-40">Back to home</a>
+                <h3 class="text-uppercase error-subtitle">ACCESS DILARANG !</h3>
+                <p class="text-muted m-t-30 m-b-30">Tampaknya anda tersesat</p>
+                <a href="<?php echo base_url('user'); ?>" style="background-color:#e34c62" class=" btn btn-danger btn-rounded waves-effect waves-light m-b-40">Back to home</a>
             </div>
         </div>
     </div>
