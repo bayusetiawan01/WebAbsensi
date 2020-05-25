@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-md-3 card" style="margin: auto; margin-left:10px; background:#e34c62; height:200px; text-align:center; border-radius:25px; float:right">
                     <p style="margin: 0; color:white; font-size:18px">Total Mahasiswa Hadir</p>
-                    <p id="hadir" style="margin:auto; font-size: 90px; color:white"></p>
+                    <p id="hadir" style="margin:auto; font-size: 90px; color:white"><?= $hadir ?></p>
                 </div>
             </div>
         </div>
@@ -133,22 +133,6 @@
             </div>
         </div>
     </div><br><br><br><br><br><br><br>
-    <script>
-        // Function ini dijalankan ketika Halaman ini dibuka pada browser
-        $(function() {
-            setInterval(hadir, 1000); //fungsi yang dijalan setiap detik, 1000 = 1 detik
-        });
-
-        //Fungi ajax untuk Menampilkan Jam dengan mengakses File ajax_timestamp.php
-        function hadir() {
-            $.ajax({
-                url: '<?= base_url('admin/hadir/') . $id ?>',
-                success: function(data) {
-                    $('#hadir').html(data);
-                },
-            });
-        }
-    </script>
     <script>
         $(function() {
             "use strict";
