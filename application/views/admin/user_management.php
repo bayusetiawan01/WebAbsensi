@@ -7,26 +7,7 @@
   <!-- ============================================================== -->
   <br><br>
   <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-    <!-- <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Export
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="<?php echo base_url('admin/pdf') ?>">PDF</a>
-      <a class="dropdown-item" href="<?php echo base_url('admin/user_excel') ?>">Excel</a>
-    </div>
-  </div> -->
-
-  <div class="dropdown">
-    <button class="btn btn-primary mb-3 dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">
-      Dropdown
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelled-by="dropdownmenu">
-      <li><a href="#">PDF</a></li>
-      <li><a href="#">Excel</a></li>
-    </ul>
-  </div>
+    
 
   <a href="<?= base_url('admin/user_pdf'); ?>" class="btn btn-primary mb-3">Eksport PDF</a>
   <a href="<?= base_url('admin/user_excel'); ?>" class="btn btn-primary mb-3">Eksport Excel</a>

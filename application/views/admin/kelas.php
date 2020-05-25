@@ -10,8 +10,8 @@
     <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newKelasModal">Tambah Kelas Baru</a>
     <a href="<?= base_url(); ?>admin/matakuliah" class="btn btn-primary mb-3">Edit Mata Kuliah</a>
 
-    <a href="<?= base_url(); ?>admin/kelas_pdf" class="btn btn-primary mb-3">Eksport PDF</a>
-    <a href="<?= base_url(); ?>admin/kelas_excel" class="btn btn-primary mb-3">Eksport Excel</a>
+    <!-- <a href="<?= base_url(); ?>admin/kelas_pdf" class="btn btn-primary mb-3" style="float: right;">Eksport PDF</a>
+    <a href="<?= base_url(); ?>admin/kelas_excel" class="btn btn-primary mb-3" style="float: right;">Eksport Excel</a> -->
 
     <div class="card">
         <div class="row">

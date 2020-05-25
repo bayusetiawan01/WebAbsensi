@@ -317,6 +317,11 @@ class Admin extends CI_Controller
         $this->load->model("kelas_model");
         $this->kelas_model->setujuiIzin($absenid, $kelasid);
     }
+    public function tolakizin($absenid, $kelasid)
+    {
+        $this->load->model("kelas_model");
+        $this->kelas_model->tolakIzin($absenid, $kelasid);
+    }
     public function addpertemuan()
     {
         $this->load->model('Kelas_model', 'model1');

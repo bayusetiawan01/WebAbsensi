@@ -89,6 +89,13 @@ class Kelas_model extends CI_Model
         $this->db->update($this->_table4);
         redirect('admin/siswahadir/' . $idper);
     }
+    public function tolakIzin($pbantu, $idper)
+    {
+        $this->db->set("status_per", 0);
+        $this->db->where("absen_id", $pbantu);
+        $this->db->update($this->_table4);
+        redirect('admin/siswahadir/' . $idper);
+    }
     public function siswaHadir($p)
     {
         $query = "SELECT `user_absen`.*, `user`.`name`, `user_kelas_pertemuan`.`kelas_id`

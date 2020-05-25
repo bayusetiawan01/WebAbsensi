@@ -50,6 +50,7 @@
                                 <?php } elseif ($m['status_per'] == 2) { ?>
                                     <a href="<?php echo site_url('assets/images/surat/' . $m['foto']) ?>" target="_blank" class="badge badge-warning">Lihat Surat</a>
                                     <a href="<?php echo site_url('admin/setujuizin/' . $m['absen_id']) . '/' . $idper ?>" class="badge badge-success">Setujui</a>
+                                    <a href="<?php echo site_url('admin/tolakizin/' . $m['absen_id']) . '/' . $idper ?>" class="badge badge-danger">Tolak</a>
                                 <?php } ?>
                             </td>
                         </tr>
