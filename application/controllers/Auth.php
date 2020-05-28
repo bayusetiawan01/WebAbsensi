@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class Auth extends CI_Controller
 {
     public function __construct()
@@ -131,6 +135,54 @@ class Auth extends CI_Controller
 
     private function _sendEmail($token, $type)
     {
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();                                            // Send using SMTP
+        $mail->Host       = 'ssl://smtp.googlemail.com';            // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+        $mail->Username   = 'absensipraktikum.mtk@gmail.com';       // SMTP username
+        $mail->Password   = 'mataikan123';                          // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+        $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+        //Recipients
+        $mail->setFrom('absensipraktikum.mtk@gmail.com', 'Absensi Praktikum Matematika Unpad');
+        $mail->addAddress($this->input->post('email'));             // Add a recipient
+
+        // Content
+        if ($type == 'verify') {
+            $data = array(
+                'email' => $this->input->post('email'),
+                'token' => urlencode($token),
+                'text' => "auth/verify?email=",
+                'text2' => "Aktivasi",
+            );
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Verifikasi Akun';
+            $mail->Body    = $this->load->view('templates/email_template', $data, true);
+            if ($mail->send()) {
+                return true;
+            } else {
+                echo $this->email->print_debugger();
+                die;
+            }
+        } elseif ($type == 'forgot') {
+            $data = array(
+                'email' => $this->input->post('email'),
+                'token' => urlencode($token),
+                'text' => "auth/resetpassword?email=",
+                'text2' => "Reset Password",
+            );
+            $mail->isHTML(true);
+            $mail->Subject = 'Reset Password';
+            $mail->Body    = $this->load->view('templates/email_template', $data, true);
+            if ($mail->send()) {
+                return true;
+            } else {
+                echo $this->email->print_debugger();
+                die;
+            }
+        }
+        /*
         $this->load->library('email');
         $config = array();
         $config['protocol'] = 'smtp';
@@ -170,6 +222,7 @@ class Auth extends CI_Controller
             echo $this->email->print_debugger();
             die;
         }
+        */
     }
 
     public function verify()

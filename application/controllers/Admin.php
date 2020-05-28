@@ -4,6 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 //load library
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 class Admin extends CI_Controller
 {
@@ -39,14 +42,18 @@ class Admin extends CI_Controller
     public function aktivasi($pointer)
     {
         $this->user_model->aktivasi($pointer);
-        $this->_sendEmail($pointer, 'activation');
+        $to = $this->db->get_where('user', ['npm' => $pointer])->row_array();
+        $to2 = $to['email'];
+        $this->kirimEmail($to2, 'activation');
         redirect(site_url('admin/usermanagement'));
     }
 
     public function deaktivasi($pointer)
     {
         $this->user_model->deaktivasi($pointer);
-        $this->_sendEmail($pointer, 'deactivation');
+        $to = $this->db->get_where('user', ['npm' => $pointer])->row_array();
+        $to2 = $to['email'];
+        $this->kirimEmail($to2, 'deactivation');
         redirect(site_url('admin/usermanagement'));
     }
 
@@ -78,42 +85,52 @@ class Admin extends CI_Controller
         }
     }
 
-    private function _sendEmail($pointer, $type)
+    private function kirimEmail($to, $type)
     {
-        $kirim = $this->db->get_where('user', ['npm' => $pointer])->row_array();
-        $this->load->library('email');
-        $config = array();
-        $config['protocol'] = 'smtp';
-        $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-        $config['smtp_user'] = 'absensipraktikum.mtk@gmail.com';
-        $config['smtp_pass'] = 'mataikan123';
-        $config['smtp_port'] = 465;
-        $config['mailtype'] = 'html';
-        $config['charset'] = 'utf-8';
-        $this->email->initialize($config);
-        $this->email->set_newline("\r\n");
-        $this->email->from('absensipraktikum.mtk@gmail.com', 'Absensi Praktikum Matematika Unpad');
-        $this->email->to($kirim['email']);
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();                                            // Send using SMTP
+        $mail->Host       = 'ssl://smtp.googlemail.com';            // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+        $mail->Username   = 'absensipraktikum.mtk@gmail.com';       // SMTP username
+        $mail->Password   = 'mataikan123';                          // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+        $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+        //Recipients
+        $mail->setFrom('absensipraktikum.mtk@gmail.com', 'Absensi Praktikum Matematika Unpad');
+        $mail->addAddress($to);                         // Add a recipient
+        $data = array();
+
         if ($type == 'activation') {
-            $this->email->subject('Laporan Aktivasi Akun');
-            $this->email->message('Selamat akun Anda telah diaktivasi oleh Admin! 
-                Klik link ini untuk login : <a href="' . base_url() . '">Link</a>');
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Laporan Aktivasi Akun';
+            $mail->Body    = $this->load->view('templates/email_activation', $data, true);
+            if ($mail->send()) {
+                return true;
+            } else {
+                echo $this->email->print_debugger();
+                die;
+            }
         } elseif ($type == 'deactivation') {
-            $this->email->subject('Laporan Nonaktivasi Akun');
-            $this->email->message('Maaf, akun Anda telah dinonaktifkan oleh Admin!
-                Silakan hubungi Asisten Laboratorium untuk informasi lebih lanjut');
+            $mail->isHTML(true);
+            $mail->Subject = 'Laporan Penonaktifan Akun';
+            $mail->Body    = $this->load->view('templates/email_deactivation', $data, true);
+            if ($mail->send()) {
+                return true;
+            } else {
+                echo $this->email->print_debugger();
+                die;
+            }
         } else {
-            $this->email->subject('Laporan Penghapusan Akun');
-            $this->email->message('Maaf, akun Anda telah dihapus oleh Admin!
-                Silakan hubungi Asisten Laboratorium untuk informasi lebih lanjut');
-        }
-
-
-        if ($this->email->send()) {
-            return true;
-        } else {
-            echo $this->email->print_debugger();
-            die;
+            $mail->isHTML(true);
+            $mail->Subject = 'Laporan Penghapusan Akun';
+            $mail->Body    = $this->load->view('templates/email_template', $data, true);
+            if ($mail->send()) {
+                return true;
+            } else {
+                echo $this->email->print_debugger();
+                die;
+            }
         }
     }
 
@@ -199,7 +216,7 @@ class Admin extends CI_Controller
                 ];
 
                 $this->db->insert('user_token', $user_token);
-                $this->_sendEmail($token, 'forgot');
+                $this->kirimEmail($token, 'forgot');
 
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                     Silakan periksa email Anda untuk mengatur ulang kata sandi Anda!</div>');
